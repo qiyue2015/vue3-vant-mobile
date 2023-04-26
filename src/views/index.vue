@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Card from '@/components/Card/index.vue'
 import { useStore } from '@/stores'
 import { localStorage } from '@/utils/local-storage'
 
@@ -20,27 +21,19 @@ watch(checked, (val) => {
 
 <template>
   <div class="container">
-    <div class="logo" />
-    <van-cell-group title="一个集成最新技术栈、完整干净的移动端模板" inset>
-      <van-cell center title="🌗 暗黑模式">
-        <template #right-icon>
-          <van-switch v-model="checked" size="18px" />
-        </template>
-      </van-cell>
+    <div class="header-area">
+      <div class="sign-up-area" />
+    </div>
 
-      <van-cell title="💿 mock 指南" to="mock" is-link />
+    <Card title="活动日历" />
 
-      <van-cell title="📊 charts 演示" to="charts" is-link />
+    <Card title="全市消费地图" />
 
-      <van-cell center>
-        <template #title>
-          <span class="custom-title">🎨 欢迎补充</span>
-          <van-tag type="primary">
-            PR
-          </van-tag>
-        </template>
-      </van-cell>
-    </van-cell-group>
+    <Card title="好店推荐" />
+
+    <Card title="电商好货" />
+
+    <Card title="区县动态" />
   </div>
 </template>
 
@@ -48,21 +41,21 @@ watch(checked, (val) => {
 .container {
   width: 100vw;
   height: 100vh;
-  padding-top: 30px;
+  padding-top: 16px;
+  padding-bottom: 32px;
   position: relative;
 
-  .logo {
-    width: 150px;
-    height: 150px;
-    background-image: url('@/assets/logo.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: center;
+  .header-area {
+    margin-bottom: 16px;
   }
 
-  .custom-title {
-    margin-right: 4px;
-    vertical-align: middle;
+  .sign-up-area {
+    width: 343px;
+    height: 190px;
+    margin: 0 auto;
+    background: url(https://expo-saas-cdn.1huizhan.com/bcs/h5/bcs-banner1.png);
+    background-size: 100% 100%;
+    border-radius: 4px;
   }
 }
 </style>
