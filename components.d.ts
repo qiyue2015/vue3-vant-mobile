@@ -8,6 +8,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Activity: typeof import('./src/components/activity/index.vue')['default']
+    Calendar: typeof import('./src/components/calendar/index.vue')['default']
     Card: typeof import('./src/components/card/index.vue')['default']
     Chart: typeof import('./src/components/chart/index.vue')['default']
     Media: typeof import('./src/components/media/index.vue')['default']

@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { queryActivities } from '@/api'
 const list = ref([])
-queryActivities().then(({ data }) => {
+queryActivities({}).then(({ data }) => {
   list.value = data
 })
 </script>

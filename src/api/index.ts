@@ -9,8 +9,9 @@ export async function queryStoreCategories(): Promise<any> {
   return request('/store/categories')
 }
 
-export async function queryActivities(): Promise<any> {
-  return request('/activities')
+export async function queryActivities(params): Promise<any> {
+  const config: AxiosRequestConfig = { params }
+  return request.get('/activities', config)
 }
 
 export async function queryActivityDetail(id, storeId): Promise<any> {

@@ -17,18 +17,19 @@ defineProps({
         <span class="custom-text">{{ item.name }}</span>
       </template>
     </van-cell>
-    <van-cell>
-      <template #title>
-        <span class="custom-title">地址：</span>
-        <span class="custom-text" />
-      </template>
-    </van-cell>
+    <!-- <van-cell> -->
+    <!--  <template #title> -->
+    <!--    <span class="custom-title">地址：</span> -->
+    <!--    <span class="custom-text" /> -->
+    <!--  </template> -->
+    <!-- </van-cell> -->
     <van-cell v-if="item.phone_list">
       <template #title>
         <span class="custom-title">电话：</span>
-        <span class="custom-text">{{ item.phone_list[0] }}</span>
+        <span class="custom-text">
+          <template v-for="tel in item.phone_list" key="tel">{{ tel }}</template>
+        </span>
       </template>
-      打电话
     </van-cell>
     <van-cell>
       <template #title>

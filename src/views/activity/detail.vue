@@ -24,18 +24,18 @@ queryActivityDetail(id, storeId).then(({ data }) => {
 </script>
 
 <template>
-  <van-swipe :autoplay="3000" height="208" lazy-render>
+  <van-swipe :autoplay="3000" height="160" lazy-render>
     <van-swipe-item v-for="image in info.images" :key="image">
       <img :src="image" style="width: 100%" alt="">
     </van-swipe-item>
   </van-swipe>
 
-  <div class="activity-info">
+  <div v-if="info.id" class="activity-info">
     <div class="name">
       {{ info.name }}
     </div>
     <div class="duration">
-      {{ info.begin_time }} - {{ info.end_time }}
+      {{ info.begin_time }} ~ {{ info.end_time }}
     </div>
   </div>
 
@@ -45,7 +45,7 @@ queryActivityDetail(id, storeId).then(({ data }) => {
     <div class="note-text">
       活动介绍
     </div>
-    <div class="" v-html="info.content" />
+    <div v-if="info" v-html="info.content" />
   </div>
 </template>
 

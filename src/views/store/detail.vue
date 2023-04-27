@@ -3,17 +3,26 @@ import { useRoute } from 'vue-router'
 import { queryStoreDetail, queryStores } from '@/api'
 
 const route = useRoute()
-const id = route.params.id
+const id = ref(route.params.id)
 
 const info = ref<any>({})
-const stores = ref<any>([])
-queryStoreDetail(id).then(({ data }) => {
-  info.value = data
-
-  const params = Object.assign({}, { categoryId: data.category_id, page: 1 })
-  queryStores(params).then(({ data }) => {
-    stores.value = data
+const stores = ref<any[]>([])
+const fetchData = () => {
+  queryStoreDetail(id.value).then(({ data }) => {
+    info.value = data
+    const params = Object.assign({}, { categoryId: data.category_id, page: 1 })
+    queryStores(params).then(({ data }) => {
+      stores.value = data
+    })
   })
+}
+
+fetchData()
+
+// 监听路由参数变化
+watch(() => route.params.id, (newId) => {
+  id.value = newId
+  fetchData()
 })
 </script>
 
