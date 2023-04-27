@@ -32,6 +32,10 @@ export async function queryProducts(params): Promise<any> {
   return request('/products', config)
 }
 
+export async function queryProductDetail(id): Promise<any> {
+  return request(`/products/${id}`)
+}
+
 export async function queryProductCategories(): Promise<any> {
   return request('/product/categories')
 }

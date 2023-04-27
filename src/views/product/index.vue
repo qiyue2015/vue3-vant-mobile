@@ -43,8 +43,8 @@ const handleTabClick = ({ name }) => {
         <van-list class="product-list" :loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
           <van-row gutter="16">
             <van-col v-for="row in list" :key="row.id" :span="12" class="product-list__item">
-              <router-link to="to" class="img-wrapper">
-                <img class="img" :src="row.image" alt="">
+              <router-link :to="{ name: 'ProductDetail', params: { id: row.id } }" class="img-wrapper">
+                <van-image :src="row.image" width="100%" height="160" fit="cover" />
               </router-link>
               <router-link to="to" class="info-wrapper">
                 <div class="title">

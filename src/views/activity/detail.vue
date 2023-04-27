@@ -16,7 +16,15 @@ const route = useRoute()
 const id = route.params.id
 const storeId = route.params.storeId
 
-const info = ref<ActivityInfo>()
+const info = ref<ActivityInfo>({
+  id: 0,
+  name: '',
+  begin_time: '',
+  end_time: '',
+  content: '',
+  images: [],
+  store: null,
+})
 
 queryActivityDetail(id, storeId).then(({ data }) => {
   info.value = data
@@ -24,9 +32,9 @@ queryActivityDetail(id, storeId).then(({ data }) => {
 </script>
 
 <template>
-  <van-swipe :autoplay="3000" height="160" lazy-render>
+  <van-swipe :autoplay="3000" height="180" lazy-render>
     <van-swipe-item v-for="image in info.images" :key="image">
-      <img :src="image" style="width: 100%" alt="">
+      <van-image :src="image" width="375" height="180" fit="cover" />
     </van-swipe-item>
   </van-swipe>
 

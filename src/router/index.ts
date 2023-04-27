@@ -14,6 +14,7 @@ import StoreIndex from '@/views/store/index.vue'
 import StoreDetail from '@/views/store/detail.vue'
 
 import ProductIndex from '@/views/product/index.vue'
+import ProductDetail from '@/views/product/detail.vue'
 
 import ArticleIndex from '@/views/article/index.vue'
 
@@ -23,7 +24,7 @@ NProgress.configure({ showSpinner: true, parent: '#app' })
 const routes = [
   {
     path: '/',
-    name: 'main',
+    name: 'Home',
     component: main,
   },
   {
@@ -50,6 +51,11 @@ const routes = [
     path: '/products',
     name: 'ProductIndex',
     component: ProductIndex,
+  },
+  {
+    path: '/products/:id',
+    name: 'ProductDetail',
+    component: ProductDetail,
   },
   {
     path: '/articles',

@@ -28,7 +28,9 @@ watch(() => route.params.id, (newId) => {
 
 <template>
   <div class="">
-    <van-image :src="info.logo" width="375" height="375" fit="cover" />
+    <div style="height: 280px;overflow: hidden">
+      <van-image :src="info.logo" width="375" height="280" fit="cover" />
+    </div>
     <StoreDetail v-if="info" :item="info" />
     <van-cell-group title="看看其它商家">
       <Store :list="stores" />

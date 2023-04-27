@@ -54,7 +54,7 @@ defineProps({
   }
 
   &:first-child {
-    padding-top: 0;
+    //padding-top: 0;
 
     &:before {
       display: none;
