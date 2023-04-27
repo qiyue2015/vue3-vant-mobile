@@ -7,14 +7,23 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Activity: typeof import('./src/components/activity/index.vue')['default']
+    Card: typeof import('./src/components/card/index.vue')['default']
     Chart: typeof import('./src/components/chart/index.vue')['default']
-    VanButton: typeof import('vant/es')['Button']
+    Media: typeof import('./src/components/media/index.vue')['default']
+    Product: typeof import('./src/components/product/index.vue')['default']
+    Store: typeof import('./src/components/store/index.vue')['default']
+    StoreDetail: typeof import('./src/components/store/StoreDetail.vue')['default']
     VanCell: typeof import('vant/es')['Cell']
     VanCellGroup: typeof import('vant/es')['CellGroup']
+    VanCol: typeof import('vant/es')['Col']
     VanConfigProvider: typeof import('vant/es')['ConfigProvider']
-    VanEmpty: typeof import('vant/es')['Empty']
-    VanNavBar: typeof import('vant/es')['NavBar']
-    VanSwitch: typeof import('vant/es')['Switch']
-    VanTag: typeof import('vant/es')['Tag']
+    VanImage: typeof import('vant/es')['Image']
+    VanList: typeof import('vant/es')['List']
+    VanRow: typeof import('vant/es')['Row']
+    VanSwipe: typeof import('vant/es')['Swipe']
+    VanSwipeItem: typeof import('vant/es')['SwipeItem']
+    VanTab: typeof import('vant/es')['Tab']
+    VanTabs: typeof import('vant/es')['Tabs']
   }
 }

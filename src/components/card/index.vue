@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 export default {
   name: 'Card',
   props: {
@@ -8,7 +8,7 @@ export default {
     },
     moreText: {
       type: String,
-      default: 'More',
+      default: '更多',
     },
     moreLink: {
       type: String,
@@ -26,15 +26,6 @@ export default {
         <a v-if="moreLink" :href="moreLink">{{ moreText }}</a>
       </template>
       <slot />
-    <!-- <div class="card"> -->
-    <!--  <div class="card-header"> -->
-    <!--    <div class="title" v-text="title" /> -->
-    <!--    <a v-if="moreLink" :href="moreLink">{{ moreText }}</a> -->
-    <!--  </div> -->
-    <!--  <div class="card-body"> -->
-    <!--    <slot /> -->
-    <!--  </div> -->
-    <!-- </div> -->
     </van-cell-group>
   </div>
 </template>
@@ -45,6 +36,7 @@ export default {
   margin: var(--van-cell-group-inset-padding);
   border-radius: var(--van-cell-group-inset-radius);
   overflow: hidden;
+  min-height: 200px;
 
   ~ .card {
     margin-top: 16px;
@@ -58,26 +50,11 @@ export default {
 
     .left-item {
       font-size: 16px;
-      color: #333;
+    }
+
+    .right-item a {
+      color: var(--van-cell-group-title-color);
     }
   }
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--van-cell-group-title-padding);
-  padding-bottom: 0;
-  color: var(--van-cell-group-title-color);
-  font-size: var(--van-cell-group-title-font-size);
-  line-height: var(--van-cell-group-title-line-height);
-}
-
-.card-body {
-  background: var(--van-cell-group-background);
-  margin: var(--van-cell-group-inset-padding);
-  border-radius: var(--van-cell-group-inset-radius);
-  overflow: hidden;
 }
 </style>

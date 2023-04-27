@@ -109,15 +109,18 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     server: {
       host: true,
       port: 3000,
-      proxy: env.VITE_HTTP_MOCK === 'true'
-        ? undefined
-        : {
-            '/api': {
-              target: '',
-              ws: false,
-              changeOrigin: true,
-            },
-          },
+      proxy: {
+        '/api': {
+          target: 'http://www.admin9.test',
+          ws: false,
+          changeOrigin: true,
+        },
+        '/storage': {
+          target: 'http://www.admin9.test',
+          ws: false,
+          changeOrigin: true,
+        },
+      },
     },
   }
 }

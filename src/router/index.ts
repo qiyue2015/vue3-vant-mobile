@@ -4,9 +4,19 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 // 导入路由组件
-import mian from '@/views/index.vue'
-import mock from '@/views/mock/index.vue'
-import charts from '@/views/charts/index.vue'
+import main from '@/views/index.vue'
+// import mock from '@/views/mock/index.vue'
+// import charts from '@/views/charts/index.vue'
+import ActivityIndex from '@/views/activity/index.vue'
+import ActivityDetail from '@/views/activity/detail.vue'
+
+import StoreIndex from '@/views/store/index.vue'
+import StoreDetail from '@/views/store/detail.vue'
+
+import ProductIndex from '@/views/product/index.vue'
+
+import ArticleIndex from '@/views/article/index.vue'
+
 NProgress.configure({ showSpinner: true, parent: '#app' })
 
 // 定义路由，每个路由都需要映射到一个组件
@@ -14,17 +24,37 @@ const routes = [
   {
     path: '/',
     name: 'main',
-    component: mian,
+    component: main,
   },
   {
-    path: '/mock',
-    name: 'mock',
-    component: mock,
+    path: '/activities',
+    name: 'ActivityIndex',
+    component: ActivityIndex,
   },
   {
-    path: '/charts',
-    name: 'charts',
-    component: charts,
+    path: '/activity/:id/:storeId',
+    name: 'ActivityDetail',
+    component: ActivityDetail,
+  },
+  {
+    path: '/stores',
+    name: 'StoreIndex',
+    component: StoreIndex,
+  },
+  {
+    path: '/stores/:id',
+    name: 'StoreDetail',
+    component: StoreDetail,
+  },
+  {
+    path: '/products',
+    name: 'ProductIndex',
+    component: ProductIndex,
+  },
+  {
+    path: '/articles',
+    name: 'ArticleIndex',
+    component: ArticleIndex,
   },
 ]
 
