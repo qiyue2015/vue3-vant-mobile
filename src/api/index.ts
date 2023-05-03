@@ -43,3 +43,7 @@ export async function queryProductCategories(): Promise<any> {
 export async function queryArticles(): Promise<any> {
   return request('/articles')
 }
+
+export async function queryBanners(): Promise<any> {
+  return request('/common/banners')
+}

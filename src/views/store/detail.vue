@@ -10,7 +10,10 @@ const stores = ref<any[]>([])
 const fetchData = () => {
   queryStoreDetail(id.value).then(({ data }) => {
     info.value = data
-    const params = Object.assign({}, { categoryId: data.category_id, page: 1 })
+    const params = Object.assign({}, {
+      categoryId: data.category_id,
+      page: 1,
+    })
     queryStores(params).then(({ data }) => {
       stores.value = data
     })
@@ -28,8 +31,8 @@ watch(() => route.params.id, (newId) => {
 
 <template>
   <div class="">
-    <div style="height: 280px;overflow: hidden">
-      <van-image :src="info.logo" width="375" height="280" fit="cover" />
+    <div class="store-image">
+      <van-image :src="info.logo" width="100%" height="100%" fit="cover" />
     </div>
     <StoreDetail v-if="info" :item="info" />
     <van-cell-group title="看看其它商家">
@@ -39,5 +42,8 @@ watch(() => route.params.id, (newId) => {
 </template>
 
 <style lang="less" scoped>
-
+.store-image {
+  width: 375px;
+  height: 280px;
+}
 </style>

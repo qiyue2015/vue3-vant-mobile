@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { take } from 'lodash-es'
-import { queryActivities, queryArticles, queryProducts, queryStores } from '@/api'
+import { queryActivities, queryArticles, queryBanners, queryProducts, queryStores } from '@/api'
 
+const banners = ref<any>([])
 const activities = ref<any>([])
 const mapAct = ref<any>(null)
 const articles = ref<any>([])
@@ -16,6 +17,9 @@ function handleDateSelected(dateString) {
 }
 
 const fetchData = () => {
+  queryBanners().then(({ data }) => {
+    banners.value = data
+  })
   queryProducts({}).then(({ data }) => {
     products.value = take(data, 6)
   })
@@ -35,18 +39,22 @@ onMounted(async () => {
 <template>
   <div class="container">
     <div class="header-area">
-      <div class="sign-up-area" />
+      <van-swipe class="sign-up-area" :autoplay="3000" indicator-color="white">
+        <van-swipe-item v-for="image in banners" :key="image">
+          <van-image :src="image" width="100%" height="100%" />
+        </van-swipe-item>
+      </van-swipe>
     </div>
 
     <Card title="活动日历" more-link="/activities" more-text="更多">
-      <div class="activity-area">
+      <div v-if="activities" class="activity-area">
         <Calendar @date-selected="handleDateSelected" />
-        <Activity v-if="activities" :list="activities" style="margin-top: 16px" />
+        <Activity :list="activities" style="margin-top: 16px" />
       </div>
     </Card>
 
-    <Card title="全市消费地图">
-      <QqMap v-if="mapAct" :item="mapAct" class="consume-map-area" />
+    <Card v-if="mapAct" title="全市消费地图">
+      <QqMap :item="mapAct" class="consume-map-area" />
     </Card>
 
     <Card title="好店推荐" more-link="/stores">
@@ -81,7 +89,6 @@ onMounted(async () => {
     width: 343px;
     height: 190px;
     margin: 0 auto;
-    background: url('@/assets/banner.png');
     background-size: 100% 100%;
     border-radius: 4px;
   }

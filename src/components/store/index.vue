@@ -8,6 +8,7 @@ defineProps({
       id: number
       logo: string
       name: string
+      address: string
       category?: {
         name: string
       }
@@ -20,14 +21,15 @@ defineProps({
 
 <template>
   <router-link v-for="row in list" :key="row.id" :to="{ name: 'StoreDetail', params: { id: row.id } }" class="store-box">
-    <van-image class="store-box_hd" :src="row.logo" fit="cover" />
+    <van-image v-if="row.logo" class="store-box_hd" :src="row.logo[0]" fit="cover" lazy-load />
+    <van-image v-else class="store-box_hd" src="/storage/images/banners/banner1.png" fit="cover" lazy-load />
     <div class="store-box_bd">
       <div class="store-box_title van-ellipsis" v-text="row.name" />
       <div class="store-box_region">
-        <span v-if="row.category" v-text="row.category.name" />
+        <van-text-ellipsis v-if="row.address" style="height: 22px" :content="row.address" />
         <!-- <span class="distance">{{ row.distance }}</span> -->
       </div>
-      <!-- <div class="store-box_category" v-text="row.category.name" /> -->
+      <div class="store-box_category" v-text="row.category.name" />
     </div>
   </router-link>
 </template>

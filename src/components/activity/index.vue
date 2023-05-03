@@ -27,7 +27,7 @@ export default {
 <template>
   <van-row gutter="16" justify="space-between">
     <van-col v-for="row in modifiedList" :key="row.id" :span="num">
-      <router-link :to="{ name: 'ActivityDetail', params: { id: row.id, storeId: row.storeId } }" class="list-item">
+      <router-link :to="{ name: 'ActivityDetail', params: { id: row.id, storeId: row.storeId || 0 } }" class="list-item">
         <img :src="row.image" class="item-img" alt="">
         <div class="van-multi-ellipsis--l2" v-text="row.name" />
       </router-link>

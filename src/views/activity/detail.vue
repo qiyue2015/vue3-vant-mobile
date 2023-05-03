@@ -32,9 +32,9 @@ queryActivityDetail(id, storeId).then(({ data }) => {
 </script>
 
 <template>
-  <van-swipe :autoplay="3000" height="180" lazy-render>
+  <van-swipe :autoplay="3000" height="23em" style="overflow:hidden;" lazy-render>
     <van-swipe-item v-for="image in info.images" :key="image">
-      <van-image :src="image" width="375" height="180" fit="cover" />
+      <van-image :src="image" width="100%" height="100%" fit="cover" />
     </van-swipe-item>
   </van-swipe>
 

@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { Lazyload } from 'vant'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import App from './App.vue'
@@ -27,5 +28,8 @@ pinia.use(piniaPluginPersistedstate)
 app
   .use(router)
   .use(pinia)
+  .use(Lazyload, {
+    lazyComponent: true,
+  })
 
 app.mount('#app')

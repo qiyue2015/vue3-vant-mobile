@@ -44,10 +44,11 @@ const handleTabClick = ({ name }) => {
           <van-row gutter="16">
             <van-col v-for="row in list" :key="row.id" :span="12" class="product-list__item">
               <router-link :to="{ name: 'ProductDetail', params: { id: row.id } }" class="img-wrapper">
-                <van-image :src="row.image" width="100%" height="160" fit="cover" />
+                <van-image v-if="row.image" :src="row.image[0]" width="100%" height="100%" fit="cover" lazy-load />
+                <van-image v-else src="/storage/images/banners/banner1.png" width="100%" height="100%" fit="cover" lazy-load />
               </router-link>
-              <router-link to="to" class="info-wrapper">
-                <div class="title">
+              <router-link :to="{ name: 'ProductDetail', params: { id: row.id } }" class="info-wrapper">
+                <div class="title van-multi-ellipsis--l2">
                   {{ row.name }}
                 </div>
                 <div class="price-box">

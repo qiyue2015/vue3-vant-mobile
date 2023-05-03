@@ -9,7 +9,10 @@ const id = route.params.id
 interface ProductInfo {
   id: number
   name: string
+  image: string
   price: number
+  market_price: number
+  content: string
   buy_link: string
 }
 
@@ -31,7 +34,7 @@ const onClickButton = () => {
 <template>
   <div v-if="info">
     <div class="mod-slider">
-      <van-image :src="info.image" width="375" height="375" fit="cover" />
+      <van-image :src="info.image" width="100%" height="100%" fit="cover" />
     </div>
     <div class="buy-area">
       <div class="price-wrap">
