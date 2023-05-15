@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { defineProps } from 'vue'
 
 defineProps({
   list: {
@@ -26,7 +25,7 @@ defineProps({
     <div class="store-box_bd">
       <div class="store-box_title van-ellipsis" v-text="row.name" />
       <div class="store-box_region">
-        <van-text-ellipsis v-if="row.address" style="height: 22px" :content="row.address" />
+        <van-text-ellipsis v-if="row.address" style="height: 22px;overflow: hidden;" :content="row.address" />
         <!-- <span class="distance">{{ row.distance }}</span> -->
       </div>
       <div class="store-box_category" v-text="row.category.name" />

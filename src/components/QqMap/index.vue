@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, onMounted, watch } from 'vue'
+import { onMounted, watch } from 'vue'
 
 // 定义组件的 props
 const props = defineProps({
