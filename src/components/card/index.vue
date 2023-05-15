@@ -24,6 +24,7 @@ export default {
       <template #title>
         <div class="left-item" v-text="title" />
         <a v-if="moreLink" :href="moreLink">{{ moreText }}</a>
+        <slot name="more-text" />
       </template>
       <slot />
     </van-cell-group>

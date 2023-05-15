@@ -16,6 +16,14 @@ function handleDateSelected(dateString) {
   })
 }
 
+// 一共有多少个活动
+let index = 0
+const onClickMap = () => {
+  const actNum = activities.value.length
+  index = (index + 1) % actNum
+  mapAct.value = activities.value[index]
+}
+
 const fetchData = () => {
   queryBanners().then(({ data }) => {
     banners.value = data
@@ -54,6 +62,11 @@ onMounted(async () => {
     </Card>
 
     <Card v-if="mapAct" title="全市消费地图">
+      <template #more-text>
+        <van-button type="default" size="mini" @click="onClickMap">
+          换一换
+        </van-button>
+      </template>
       <QqMap :item="mapAct" class="consume-map-area" />
     </Card>
 

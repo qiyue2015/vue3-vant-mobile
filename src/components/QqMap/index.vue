@@ -1,16 +1,23 @@
 <script setup lang="ts">
+import { defineProps, onMounted, watch } from 'vue'
+
 // 定义组件的 props
 const props = defineProps({
   item: Object,
 })
 
+let mapInstance = null
+
 const initMap = () => {
+  if (mapInstance)
+    mapInstance.destroy()
+
   const TMap = (window as any).TMap // TMap地图实例
   const LatLng = TMap.LatLng // 用于创建经纬度坐标实例
-  const center = new LatLng(29.606717, 103.791473) // 设置中心点坐标
+  const center = new LatLng(props.item.latitude, props.item.longitude) // 设置中心点坐标
 
   // 初始化地图
-  const map = new TMap.Map('map-container', {
+  mapInstance = new TMap.Map('map-container', {
     center,
     zoom: 15,
     showControl: false,
@@ -31,7 +38,7 @@ const initMap = () => {
 
   /* eslint-disable no-new */
   new TMap.InfoWindow({
-    map,
+    map: mapInstance,
     position: center,
     content: htmlTpl,
     enableCustom: true,
@@ -45,6 +52,10 @@ const initMap = () => {
 onMounted(() => {
   initMap()
 })
+
+watch(() => props.item, () => {
+  initMap()
+})
 </script>
 
 <template>
@@ -52,7 +63,3 @@ onMounted(() => {
     <div id="map-container" class="map-area" />
   </div>
 </template>
-
-<style lang="less" scoped>
-/* 根据你的需求添加样式 */
-</style>
