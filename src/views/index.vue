@@ -9,6 +9,10 @@ const articles = ref<any>([])
 const products = ref<any>([])
 const stores = ref<any>([])
 
+const articleQuery = ref({ page: 1 })
+const articleLoading = ref(false)
+const articleFinished = ref(false)
+
 function handleDateSelected(dateString) {
   queryActivities({ beginTime: dateString }).then(({ data }) => {
     activities.value = take(data, 4)
@@ -34,22 +38,40 @@ const fetchData = () => {
   queryStores({}).then(({ data }) => {
     stores.value = take(data, 3)
   })
-  queryArticles().then(({ data }) => {
-    articles.value = data
-  })
+  // queryArticles().then(({ data }) => {
+  //   articles.value = data
+  // })
 }
 
 onMounted(async () => {
   await fetchData()
 })
+
+const onClickBanner = ({ link }) => {
+  window.location.href = link
+}
+
+const onArticleLoad = () => {
+  if (!articleLoading.value) {
+    articleLoading.value = true
+    queryArticles(articleQuery.value).then(({ data, meta }) => {
+      articleQuery.value.page = meta.next_page
+      articles.value = articles.value.concat(data)
+      articleFinished.value = meta.next_page === null
+    }).finally(() => {
+      articleLoading.value = false
+    })
+  }
+}
 </script>
 
 <template>
   <div class="container">
     <div class="header-area">
       <van-swipe class="sign-up-area" :autoplay="3000" indicator-color="white">
-        <van-swipe-item v-for="image in banners" :key="image">
-          <van-image :src="image" width="100%" height="100%" />
+        <van-swipe-item v-for="row in banners" :key="row.image">
+          <van-image v-if="row.link" :src="row.image" width="100%" height="100%" @click="onClickBanner(row)" />
+          <van-image v-else :src="row.image" width="100%" height="100%" />
         </van-swipe-item>
       </van-swipe>
     </div>
@@ -81,7 +103,9 @@ onMounted(async () => {
     </Card>
 
     <Card title="区县动态" more-link="/articles">
-      <Media :list="articles" />
+      <van-list v-model="articleLoading" :finished="articleFinished" finished-text="没有更多了" @load="onArticleLoad">
+        <Media :list="articles" />
+      </van-list>
     </Card>
   </div>
 </template>

@@ -40,8 +40,9 @@ export async function queryProductCategories(): Promise<any> {
   return request('/product/categories')
 }
 
-export async function queryArticles(): Promise<any> {
-  return request('/articles')
+export async function queryArticles(params): Promise<any> {
+  const config: AxiosRequestConfig = { params }
+  return request('/articles', config)
 }
 
 export async function queryBanners(): Promise<any> {

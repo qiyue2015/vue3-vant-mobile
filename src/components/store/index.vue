@@ -20,7 +20,7 @@ defineProps({
 
 <template>
   <router-link v-for="row in list" :key="row.id" :to="{ name: 'StoreDetail', params: { id: row.id } }" class="store-box">
-    <van-image v-if="row.logo" class="store-box_hd" :src="row.logo[0]" fit="cover" lazy-load />
+    <van-image v-if="row.logo" class="store-box_hd" :src="row.logo" fit="cover" lazy-load />
     <van-image v-else class="store-box_hd" src="/storage/images/banners/banner1.png" fit="cover" lazy-load />
     <div class="store-box_bd">
       <div class="store-box_title van-ellipsis" v-text="row.name" />
