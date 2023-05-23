@@ -6103,9 +6103,9 @@ validate-npm-package-license@^3.0.1:
     spdx-expression-parse "^3.0.0"
 
 vant@^4.2.0:
-  version "4.3.2"
-  resolved "https://registry.npmmirror.com/vant/-/vant-4.3.2.tgz#f47c1d508f521439d9fbed0d8a714e73c53a1e1f"
-  integrity sha512-npAk1cxmVvth1L+/yQyNWUYb7Yrfhi0feojASUCVw9k9QnxGq+1pDjyjaFBXGv9dPuDOEqIiIZvTqUR2VvHGEA==
+  version "4.4.0"
+  resolved "https://registry.npmmirror.com/vant/-/vant-4.4.0.tgz#328a3a4490082db0cbdea4f9ce314257b44db841"
+  integrity sha512-vVIVqZTmA425cbRhzY9krBfI1myknc1Sv3Kt9f4a1D+pTTSlodUhNhyPe3zttYdKnRl2thZg940CFGt65Rr5iQ==
   dependencies:
     "@vant/popperjs" "^1.3.0"
     "@vant/use" "^1.5.1"
