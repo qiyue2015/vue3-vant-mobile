@@ -1,13 +1,4 @@
 <script setup lang="ts">
-definePage({
-  name: 'charts',
-  meta: {
-    level: 2,
-    title: '📊 Echarts 演示',
-    i18n: 'home.echartsDemo',
-  },
-})
-
 const { t } = useI18n()
 
 const barOption = {
@@ -69,9 +60,17 @@ const refScoreOption = ref(scoreOption)
 </script>
 
 <template>
-  <Container>
-    <Chart :option="refBarOption" :style="{ height: '330px' }" />
-    <Chart :option="refLineOption" :style="{ height: '330px' }" />
-    <Chart :option="refScoreOption" :style="{ height: '330px' }" />
-  </Container>
+  <Chart :option="refBarOption" :style="{ height: '330px' }" />
+  <Chart :option="refLineOption" :style="{ height: '330px' }" />
+  <Chart :option="refScoreOption" :style="{ height: '330px' }" />
 </template>
+
+<route lang="json">
+{
+  "name": "charts",
+  "meta": {
+    "title": "📊 Echarts 演示",
+    "i18n": "menus.echartsDemo"
+  }
+}
+</route>

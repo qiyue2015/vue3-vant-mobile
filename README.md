@@ -174,11 +174,9 @@ And you will see the generated file in `dist` that ready to be served.
 
 Go to [Netlify](https://app.netlify.com/start) and select your clone, `OK` along the way, and your App will be live in a minute.
 
-## Community
+## Community 👏
 
-We recommend that [issue](https://github.com/easy-temps/vue3-vant-mobile/issues) be used for problem feedback, or Wechat group.
-
-<img style="width: 25%" src="https://cdn.jsdelivr.net/gh/easy-temps/easy-static/community.png" alt="community" />
+We recommend that [issue](https://github.com/easy-temps/vue3-vant-mobile/issues) be used for problem feedback, or [Wechat group](https://github.com/easy-temps/vue3-vant-mobile/issues/56).
 
 ## Donation ☕
 
@@ -194,6 +192,7 @@ Your sponsorship will help us continue to iterate on this exciting project! 🚀
 <a href="https://github.com/keyFeng"><img src="https://avatars.githubusercontent.com/u/52267976?v=4" width="60px" alt="keyFeng" /></a>
 <a href="https://github.com/ljt990218"><img src="https://avatars.githubusercontent.com/u/50509815?v=4" width="60px" alt="ljt990218" /></a>
 <a href="https://github.com/heked"><img src="https://avatars.githubusercontent.com/u/14127731?v=4" width="60px" alt="heked" /></a>
+<a href="https://github.com/topcnm"><img src="https://avatars.githubusercontent.com/u/8057893?v=4" width="60px" alt="topcnm" /></a>
 </p>
 
 <h2 align="center">
@@ -222,6 +221,8 @@ Our contributors have made this project better. Thank you! 🙏
 <a href="https://github.com/qiyue2015"><img src="https://avatars.githubusercontent.com/u/11554433?v=4" width="60px" alt="qiyue2015" /></a>
 <a href="https://github.com/pyQianYi"><img src="https://avatars.githubusercontent.com/u/57526688?v=4" width="60px" alt="pyQianYi" /></a>
 <a href="https://github.com/xyy94813"><img src="https://avatars.githubusercontent.com/u/17971352?v=4" width="60px" alt="xyy94813" /></a>
+<a href="https://github.com/faukwaa"><img src="https://avatars.githubusercontent.com/u/133618995?v=4" width="60px" alt="faukwaa" /></a>
+<a href="https://github.com/chensongni"><img src="https://avatars.githubusercontent.com/u/18071921?v=4" width="60px" alt="chensongni" /></a>
 </p>
 
 ## License

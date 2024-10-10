@@ -20,15 +20,14 @@ export const languageColumns: PickerColumn = [
 
 /** 获取当前语言对应的语言包名称 */
 function getI18nLocale() {
-  const locale = localStorage.getItem('language') || navigator.language
-  for (const l of languageColumns) {
-    const value = l.value as string
-    if (value === locale)
-      return locale // 存在当前语言的语言包
-    else if (value.indexOf(locale) === 0)
-      return value // 存在当前语言的任意地区的语言包
-  }
-  return FALLBACK_LOCALE // 使用默认语言包
+  const storedLocale = localStorage.getItem('language') || navigator.language
+
+  const langs = languageColumns.map(v => v.value as string)
+  const foundLocale = langs.find(v => v === storedLocale || v.indexOf(storedLocale) === 0) // 存在当前语言的语言包 或 存在当前语言的任意地区的语言包
+  const locale = foundLocale || FALLBACK_LOCALE // 若未找到，则使用 默认语言包
+
+  document.querySelector('html').setAttribute('lang', locale)
+  return locale
 }
 
 export const i18n = createI18n({
@@ -43,6 +42,7 @@ export const locale = computed({
     return i18n.global.locale.value
   },
   set(language: string) {
+    document.querySelector('html').setAttribute('lang', language)
     localStorage.setItem('language', language)
     i18n.global.locale.value = language
     Locale.use(language)
