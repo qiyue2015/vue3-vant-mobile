@@ -1,5 +1,5 @@
 <template>
-  <van-button size="small" plain type="primary">
+  <van-button v-bind="$attrs" plain type="primary">
     <slot />
   </van-button>
 </template>

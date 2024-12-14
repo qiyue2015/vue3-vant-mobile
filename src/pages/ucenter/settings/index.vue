@@ -14,7 +14,7 @@ function Logout() {
   })
     .then(() => {
       userStore.logout()
-      router.push({ name: 'home' })
+      router.push({ name: 'qiyue-pro' })
     })
     .catch(() => {})
 }
@@ -42,8 +42,7 @@ function Logout() {
 {
   name: 'settings',
   meta: {
-    title: '我的设置',
-    i18n: 'menus.settings'
+    title: '我的设置'
   },
 }
 </route>

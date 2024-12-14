@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { routeWhiteList } from '@/config/routes'
+import useWeChat from '@/hooks/useWeChat'
 
 const route = useRoute()
 const router = useRouter()
+const { isWeixinBrowser } = useWeChat()
 
 function onBack() {
   if (window.history.state.back)
@@ -20,15 +22,22 @@ const title = computed(() => {
   return route.meta.i18n ? t(route.meta.i18n) : (route.meta.title || '')
 })
 
-const showLeftArrow = computed(() => route.name && routeWhiteList.includes(route.name))
+const showLeftArrow = computed(() => {
+  if (isWeixinBrowser) {
+    return false
+  }
+
+  return !routeWhiteList.includes(route.name)
+})
 </script>
 
 <template>
   <VanNavBar
+    v-show="showLeftArrow"
     :title="title"
     :fixed="true"
-    clickable placeholder
-    :left-arrow="!showLeftArrow"
+
+    safe-area-inset-top placeholder
     @click-left="onBack"
   />
 </template>

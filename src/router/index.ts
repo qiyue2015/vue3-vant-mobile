@@ -6,9 +6,7 @@ import 'nprogress/nprogress.css'
 
 import type { EnhancedRouteLocation } from './types'
 import useRouteCacheStore from '@/stores/modules/routeCache'
-import { useUserStore } from '@/stores'
-
-import { isLogin } from '@/utils/auth'
+import { useAppStore, useUserStore } from '@/stores'
 import setPageTitle from '@/utils/set-page-title'
 
 NProgress.configure({ showSpinner: true, parent: '#app' })
@@ -27,6 +25,7 @@ router.beforeEach(async (to: EnhancedRouteLocation, _from, next) => {
   NProgress.start()
 
   const routeCacheStore = useRouteCacheStore()
+  const appStore = useAppStore()
   const userStore = useUserStore()
 
   // Route cache
@@ -35,8 +34,20 @@ router.beforeEach(async (to: EnhancedRouteLocation, _from, next) => {
   // Set page title
   setPageTitle(to.meta.title)
 
-  if (isLogin() && !userStore.userInfo?.uid)
-    await userStore.info()
+  const params = to.params as { uniacid: string }
+  if (params?.uniacid) {
+    if (appStore.account?.uniacid !== params?.uniacid) {
+      appStore.resetSetting()
+    }
+    if (!appStore.account) {
+      await appStore.getSetting()
+    }
+    if (!userStore.userInfo?.uid) {
+      await userStore.info()
+    }
+  }
+
+  useHead({ title: to.meta.title })
 
   next()
 })

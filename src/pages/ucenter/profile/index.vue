@@ -41,8 +41,7 @@ function login() {
 {
   name: 'profile',
   meta: {
-    title: '个人中心',
-    i18n: 'menus.profile'
+    title: '个人中心'
   },
 }
 </route>

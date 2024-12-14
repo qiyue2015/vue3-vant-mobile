@@ -73,7 +73,7 @@ async function getCode() {
 </script>
 
 <template>
-  <div class="m-x-a w-7xl text-center">
+  <div class="m-x-a mt-32 w-7xl text-center">
     <van-form :model="postData" :rules="rules" validate-trigger="onSubmit" @submit="reset">
       <div class="overflow-hidden rounded-3xl">
         <van-field
@@ -131,9 +131,9 @@ async function getCode() {
       </div>
     </van-form>
 
-    <GhostButton to="login" block :style="{ 'margin-top': vw(8) }">
+    <ghost-button to="login" block :style="{ 'margin-top': vw(16) }">
       {{ $t('forgot-password.backToLogin') }}
-    </GhostButton>
+    </ghost-button>
   </div>
 </template>
 
@@ -141,7 +141,7 @@ async function getCode() {
 {
   name: 'forgot-password',
   meta: {
-    i18n: 'menus.forgot-password'
+    title: '忘记密码'
   },
 }
 </route>

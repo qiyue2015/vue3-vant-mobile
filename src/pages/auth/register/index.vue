@@ -77,24 +77,13 @@ async function getCode() {
 </script>
 
 <template>
-  <div class="m-x-a w-7xl text-center">
+  <div class="m-x-a mt-32 w-7xl text-center">
     <van-form :model="postData" :rules="rules" validate-trigger="onSubmit" @submit="register">
       <div class="overflow-hidden rounded-3xl">
-        <van-field
-          v-model.trim="postData.email"
-          :rules="rules.email"
-          name="email"
-          :placeholder="t('register.email')"
-        />
+        <van-field v-model.trim="postData.email" :rules="rules.email" :placeholder="t('register.email')" name="email" />
       </div>
-
       <div class="mt-16 overflow-hidden rounded-3xl">
-        <van-field
-          v-model.trim="postData.code"
-          :rules="rules.code"
-          name="code"
-          :placeholder="t('register.code')"
-        >
+        <van-field v-model.trim="postData.code" :rules="rules.code" :placeholder="t('register.code')" name="code">
           <template #button>
             <van-button size="small" type="primary" plain @click="getCode">
               {{ buttonText }}
@@ -102,51 +91,24 @@ async function getCode() {
           </template>
         </van-field>
       </div>
-
       <div class="mt-16 overflow-hidden rounded-3xl">
-        <van-field
-          v-model.trim="postData.nickname"
-          :rules="rules.nickname"
-          name="nickname"
-          :placeholder="t('register.nickname')"
-        />
+        <van-field v-model.trim="postData.nickname" :rules="rules.nickname" :placeholder="t('register.nickname')" name="nickname" />
       </div>
-
       <div class="mt-16 overflow-hidden rounded-3xl">
-        <van-field
-          v-model.trim="postData.password"
-          type="password"
-          :rules="rules.password"
-          name="password"
-          :placeholder="t('register.password')"
-        />
+        <van-field v-model.trim="postData.password" :rules="rules.password" :placeholder="t('register.password')" name="password" type="password" />
       </div>
-
       <div class="mt-16 overflow-hidden rounded-3xl">
-        <van-field
-          v-model.trim="postData.confirmPassword"
-          type="password"
-          :rules="rules.confirmPassword"
-          name="confirmPassword"
-          :placeholder="t('register.comfirmPassword')"
-        />
+        <van-field v-model.trim="postData.confirmPassword" :rules="rules.confirmPassword" :placeholder="t('register.comfirmPassword')" name="confirmPassword" type="password" />
       </div>
-
       <div class="mt-16">
-        <van-button
-          :loading="loading"
-          type="primary"
-          native-type="submit"
-          round block
-        >
+        <van-button :loading="loading" type="primary" native-type="submit" round block>
           {{ $t('register.confirm') }}
         </van-button>
       </div>
     </van-form>
-
-    <GhostButton to="login" block :style="{ 'margin-top': vw(8) }">
+    <ghost-button to="login" block :style="{ 'margin-top': vw(16) }">
       {{ $t('register.backToLogin') }}
-    </GhostButton>
+    </ghost-button>
   </div>
 </template>
 
@@ -154,7 +116,7 @@ async function getCode() {
 {
   name: 'register',
   meta: {
-    i18n: 'menus.register'
+    title: '注册'
   },
 }
 </route>
