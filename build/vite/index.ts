@@ -27,6 +27,12 @@ export function createVitePlugins(mode: string) {
       extensions: ['.vue'],
       routesFolder: 'src/pages',
       dts: 'src/types/typed-router.d.ts',
+      async extendRoute(route) {
+        if (route.name !== '404' && route.node.parent?.parent === undefined && route.path) {
+          route.path = `/:uniacid(\\\\d+)${route.path}`
+        }
+        return route
+      },
     }),
 
     vue(),
