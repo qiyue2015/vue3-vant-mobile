@@ -19,10 +19,11 @@ export default ({ mode }: ConfigEnv): UserConfig => {
       host: true,
       port: 3000,
       proxy: {
-        '/api': {
-          target: '',
+        [env.VITE_APP_API_BASE_URL]: {
+          target: env.VITE_APP_API_PROXY_HOST,
           ws: false,
           changeOrigin: true,
+          rewrite: path => path.replace(env.VITE_APP_API_BASE_URL, ''),
         },
       },
     },
