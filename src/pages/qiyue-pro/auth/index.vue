@@ -3,7 +3,6 @@
 </script>
 
 <template>
-  <div>ucenter</div>
 </template>
 
 <style scoped>
@@ -12,10 +11,9 @@
 
 <route lang="json5">
 {
-  name: 'ucenter',
+name: 'QiyueProAuth',
   meta: {
-    title: '用户中心',
-    showTabbar: true,
+    title: '个人中心'
   },
 }
 </route>

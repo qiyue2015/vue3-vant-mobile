@@ -73,7 +73,7 @@ async function login(values: any) {
 
 <route lang="json5">
 {
-  name: 'login',
+  name: 'QiyueProAuthLogin',
   meta: {
     title: '登录'
   },

@@ -29,7 +29,7 @@
 
 <route lang="json5">
 {
-  name: 'qiyue-pro',
+  name: 'QiyuePro',
   meta: {
     title: '主页',
     showTabbar: true,

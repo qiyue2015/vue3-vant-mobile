@@ -20,13 +20,14 @@ declare module 'vue-router/auto-routes' {
   export interface RouteNamedMap {
     '404': RouteRecordInfo<'404', '/:all(.*)', { all: ParamValue<true> }, { all: ParamValue<false> }>,
     'home': RouteRecordInfo<'home', '/:uniacid(\\d+)/', Record<never, never>, Record<never, never>>,
-    'forgot-password': RouteRecordInfo<'forgot-password', '/:uniacid(\\d+)/auth/forgot-password', Record<never, never>, Record<never, never>>,
-    'login': RouteRecordInfo<'login', '/:uniacid(\\d+)/auth/login', Record<never, never>, Record<never, never>>,
-    'register': RouteRecordInfo<'register', '/:uniacid(\\d+)/auth/register', Record<never, never>, Record<never, never>>,
-    'qiyue-event': RouteRecordInfo<'qiyue-event', '/:uniacid(\\d+)/qiyue-event', Record<never, never>, Record<never, never>>,
-    'qiyue-pro': RouteRecordInfo<'qiyue-pro', '/:uniacid(\\d+)/qiyue-pro', Record<never, never>, Record<never, never>>,
-    'ucenter': RouteRecordInfo<'ucenter', '/:uniacid(\\d+)/ucenter', Record<never, never>, Record<never, never>>,
-    'profile': RouteRecordInfo<'profile', '/:uniacid(\\d+)/ucenter/profile', Record<never, never>, Record<never, never>>,
-    'settings': RouteRecordInfo<'settings', '/:uniacid(\\d+)/ucenter/settings', Record<never, never>, Record<never, never>>,
+    'QiyueEvent': RouteRecordInfo<'QiyueEvent', '/:uniacid(\\d+)/qiyue-event', Record<never, never>, Record<never, never>>,
+    'QiyuePro': RouteRecordInfo<'QiyuePro', '/:uniacid(\\d+)/qiyue-pro', Record<never, never>, Record<never, never>>,
+    'QiyueProAuth': RouteRecordInfo<'QiyueProAuth', '/:uniacid(\\d+)/qiyue-pro/auth', Record<never, never>, Record<never, never>>,
+    'QiyueProAuthForgotPassword': RouteRecordInfo<'QiyueProAuthForgotPassword', '/:uniacid(\\d+)/qiyue-pro/auth/forgot-password', Record<never, never>, Record<never, never>>,
+    'QiyueProAuthLogin': RouteRecordInfo<'QiyueProAuthLogin', '/:uniacid(\\d+)/qiyue-pro/auth/login', Record<never, never>, Record<never, never>>,
+    'QiyueProAuthRegister': RouteRecordInfo<'QiyueProAuthRegister', '/:uniacid(\\d+)/qiyue-pro/auth/register', Record<never, never>, Record<never, never>>,
+    'QiyueProUcenter': RouteRecordInfo<'QiyueProUcenter', '/:uniacid(\\d+)/qiyue-pro/ucenter', Record<never, never>, Record<never, never>>,
+    'QiyueProUcenterProfile': RouteRecordInfo<'QiyueProUcenterProfile', '/:uniacid(\\d+)/qiyue-pro/ucenter/profile', Record<never, never>, Record<never, never>>,
+    'QiyueProUcenterSettings': RouteRecordInfo<'QiyueProUcenterSettings', '/:uniacid(\\d+)/qiyue-pro/ucenter/settings', Record<never, never>, Record<never, never>>,
   }
 }

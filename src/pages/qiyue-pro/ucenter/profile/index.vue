@@ -39,7 +39,7 @@ function login() {
 
 <route lang="json5">
 {
-  name: 'profile',
+  name: 'QiyueProUcenterProfile',
   meta: {
     title: '个人中心'
   },

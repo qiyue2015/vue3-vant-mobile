@@ -32,12 +32,12 @@ const showLeftArrow = computed(() => {
 </script>
 
 <template>
-  <VanNavBar
+  <van-nav-bar
     v-show="showLeftArrow"
     :title="title"
     :fixed="true"
-
-    safe-area-inset-top placeholder
+    safe-area-inset-top
+    placeholder
     @click-left="onBack"
   />
 </template>

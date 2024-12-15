@@ -139,7 +139,7 @@ async function getCode() {
 
 <route lang="json5">
 {
-  name: 'forgot-password',
+  name: 'QiyueProAuthForgotPassword',
   meta: {
     title: '忘记密码'
   },

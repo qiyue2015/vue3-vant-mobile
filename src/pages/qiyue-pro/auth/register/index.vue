@@ -114,7 +114,7 @@ async function getCode() {
 
 <route lang="json5">
 {
-  name: 'register',
+  name: 'QiyueProAuthRegister',
   meta: {
     title: '注册'
   },

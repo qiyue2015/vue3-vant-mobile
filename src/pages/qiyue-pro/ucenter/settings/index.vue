@@ -40,7 +40,7 @@ function Logout() {
 
 <route lang="json5">
 {
-  name: 'settings',
+  name: 'QiyueProUcenterSettings',
   meta: {
     title: '我的设置'
   },

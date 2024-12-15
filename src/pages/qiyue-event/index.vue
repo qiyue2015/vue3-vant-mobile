@@ -40,7 +40,7 @@ async function onLoad() {
 
 <route lang="json5">
 {
-  name: 'qiyue-event',
+  name: 'QiyueEvent',
   meta: {
     title: '活动例表',
     showTabbar: true,
