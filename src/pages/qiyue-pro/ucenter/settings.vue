@@ -1,22 +1,23 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import { showConfirmDialog } from 'vant'
-import router from '@/router'
 import { useUserStore } from '@/stores'
 import { version } from '~root/package.json'
 
-const { t } = useI18n()
+const router = useRouter()
 const userStore = useUserStore()
 const userInfo = computed(() => userStore.userInfo)
 
 function Logout() {
-  showConfirmDialog({
-    title: t('settings.comfirmTitle'),
-  })
-    .then(() => {
-      userStore.logout()
-      router.push({ name: 'qiyue-pro' })
+  showConfirmDialog({ title: '确认登出' }).then(() => {
+    userStore.logout()
+    router.push({
+      name: 'QiyueProHome',
+      params: {
+        ...router.currentRoute.value.params,
+      },
     })
-    .catch(() => {})
+  })
 }
 </script>
 
@@ -42,7 +43,8 @@ function Logout() {
 {
   name: 'QiyueProUcenterSettings',
   meta: {
-    title: '我的设置'
+    title: '我的设置',
+    requiresAuth: true
   },
 }
 </route>

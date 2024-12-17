@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { routeWhiteList } from '@/config/routes'
 import { isWeixinBrowser } from '@/utils'
 
 const route = useRoute()
@@ -9,7 +8,7 @@ function onBack() {
   if (window.history.state.back)
     history.back()
   else
-    router.replace('/')
+    router.replace({ name: 'QiyueEventHome' })
 }
 
 const { t } = useI18n()
@@ -26,17 +25,19 @@ const show = computed(() => {
     return false
   }
 
-  return !routeWhiteList.includes(route.name)
+  return route.meta?.showNavbar
 })
 </script>
 
 <template>
   <van-nav-bar
-    v-show="showLeftArrow"
+    v-if="show"
     :title="title"
     :fixed="true"
-    safe-area-inset-top
-    placeholder
+    :safe-area-inset-top="true"
+    :placeholder="true"
+    :left-arrow="true"
+    left-text="返回"
     @click-left="onBack"
   />
 </template>

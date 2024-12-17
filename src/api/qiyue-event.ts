@@ -1,7 +1,13 @@
 import request from '@/utils/request'
 
-export async function queryQiyueEventList(params: any): Promise<any> {
+export async function queryQiyueEventList(params?: any): Promise<any> {
   return request('/app/index.php?c=entry&m=qiyue_event&do=event&op=list', {
+    params,
+  })
+}
+
+export async function queryQiyueEventDetail(params?: any): Promise<any> {
+  return request('/app/index.php?c=entry&m=qiyue_event&do=event&op=detail', {
     params,
   })
 }

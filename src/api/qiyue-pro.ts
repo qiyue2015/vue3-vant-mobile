@@ -14,3 +14,10 @@ export async function queryQiyueProTabbar(): Promise<any> {
 export async function queryQiyueProLayout(op: string): Promise<any> {
   return request(`/app/index.php?c=entry&m=qiyue_pro&do=page&op=${op}`)
 }
+
+// 获取文章例表
+export async function queryQiyueProArticle(params: any): Promise<any> {
+  return request('/app/index.php?c=entry&m=qiyue_pro&do=article&op=list', {
+    params,
+  })
+}

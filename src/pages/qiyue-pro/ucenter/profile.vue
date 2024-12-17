@@ -1,17 +1,25 @@
 <script setup lang="ts">
+import router from '@/router'
 import { useUserStore } from '@/stores'
 import defaultAvatar from '@/assets/images/default-avatar.svg'
 
 const userStore = useUserStore()
 const userInfo = computed(() => userStore.userInfo)
 const isLogin = computed(() => !!userInfo.value.uid)
+
+function login() {
+  if (isLogin.value)
+    return
+
+  router.push({ name: 'QiyueProAuthLogin', query: { redirect: 'profile' } })
+}
 </script>
 
 <template>
   <div class="p12">
-    <van-space direction="vertical" size="10px" fill>
+    <van-space direction="vertical" fill>
       <van-cell-group :inset="true">
-        <van-cell center :is-link="isLogin" :to="{ name: 'QiyueProUcenterSettings' }">
+        <van-cell center :is-link="isLogin" :to="{ name: 'QiyueProUcenterSettings' }" @click="login">
           <template #icon>
             <van-image :src="userInfo.avatar || defaultAvatar" round class="mr-12 h-48 w-48" />
           </template>
@@ -25,15 +33,11 @@ const isLogin = computed(() => !!userInfo.value.uid)
         </van-cell>
       </van-cell-group>
       <van-cell-group :inset="true">
-        <van-grid :gutter="10" :border="false" :column-num="2">
-          <van-grid-item icon="star-o" text="待参加活动" :to="{ name: 'QiyueEventMy', query: { key: 'unattend' } }" />
-          <van-grid-item icon="fire-o" text="待审核活动" :to="{ name: 'QiyueEventMy', query: { key: 'pending' } }" />
-        </van-grid>
+        <van-cell icon="fire-o" title="我的活动" is-link />
+        <van-cell icon="todo-list-o" title="浏览历史" is-link />
       </van-cell-group>
       <van-cell-group :inset="true">
-        <van-cell icon="todo-list-o" title="关注我们" is-link />
-        <van-cell icon="todo-list-o" title="浏览记录" :to="{ name: 'QiyueProUcenterHistory' }" is-link />
-        <van-cell icon="todo-list-o" title="联系客服" is-link />
+        <van-cell title="退出登录" is-link />
       </van-cell-group>
     </van-space>
   </div>
@@ -41,10 +45,10 @@ const isLogin = computed(() => !!userInfo.value.uid)
 
 <route lang="json5">
 {
-  name: 'QiyueProUcenter',
+  name: 'QiyueProUcenterProfile',
   meta: {
-    title: '会员中心',
-    showTabbar: true,
+    title: '个人信息',
+    requiresAuth: true
   },
 }
 </route>
