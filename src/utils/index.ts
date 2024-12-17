@@ -2,3 +2,7 @@
 export function getUniacid(): string | null {
   return window.location.pathname.match(/^\/(\d+)/)?.[1] || null
 }
+
+export function isWeixinBrowser(): boolean {
+  return navigator.userAgent.toLowerCase().includes('micromessenger')
+}

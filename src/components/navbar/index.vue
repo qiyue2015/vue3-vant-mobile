@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { routeWhiteList } from '@/config/routes'
-import useWeChat from '@/hooks/useWeChat'
+import { isWeixinBrowser } from '@/utils'
 
 const route = useRoute()
 const router = useRouter()
-const { isWeixinBrowser } = useWeChat()
 
 function onBack() {
   if (window.history.state.back)
@@ -22,8 +21,8 @@ const title = computed(() => {
   return route.meta.i18n ? t(route.meta.i18n) : (route.meta.title || '')
 })
 
-const showLeftArrow = computed(() => {
-  if (isWeixinBrowser) {
+const show = computed(() => {
+  if (isWeixinBrowser()) {
     return false
   }
 

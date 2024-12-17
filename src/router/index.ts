@@ -7,6 +7,7 @@ import 'nprogress/nprogress.css'
 import type { EnhancedRouteLocation } from './types'
 import useRouteCacheStore from '@/stores/modules/routeCache'
 import { useAppStore, useUserStore } from '@/stores'
+import { isWeixinBrowser } from '@/utils'
 import setPageTitle from '@/utils/set-page-title'
 
 NProgress.configure({ showSpinner: true, parent: '#app' })
@@ -31,9 +32,6 @@ router.beforeEach(async (to: EnhancedRouteLocation, _from, next) => {
   // Route cache
   routeCacheStore.addRoute(to)
 
-  // Set page title
-  setPageTitle(to.meta.title)
-
   const params = to.params as { uniacid: string }
   if (params?.uniacid) {
     if (appStore.account?.uniacid !== params?.uniacid) {
@@ -42,12 +40,20 @@ router.beforeEach(async (to: EnhancedRouteLocation, _from, next) => {
     if (!appStore.account) {
       await appStore.getSetting()
     }
+
+    // Set page title
+    const pageTitle = (appStore.account.name || to.meta.title) as string
+    if (isWeixinBrowser()) {
+      useHead({ title: pageTitle })
+    }
+    else {
+      setPageTitle(pageTitle)
+    }
+
     if (!userStore.userInfo?.uid) {
       await userStore.info()
     }
   }
-
-  useHead({ title: to.meta.title })
 
   next()
 })
