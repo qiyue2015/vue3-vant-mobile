@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import MArticleItems from 'MArticleItems.vue'
-
 const props = defineProps<{
   params: {
     constraint: {
