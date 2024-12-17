@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type RouteMap, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { useAppStore, useUserStore } from '@/stores'
 
 import vw from '@/utils/inline-px-to-vw'
@@ -28,13 +28,17 @@ async function login(values: any) {
   try {
     loading.value = true
     await userStore.login({ ...postData, ...values })
-    const { redirect, ...othersQuery } = router.currentRoute.value.query
-    await router.push({
-      name: (redirect as keyof RouteMap) || 'qiyue-pro',
-      query: {
-        ...othersQuery,
-      },
-    })
+    const { redirect } = router.currentRoute.value.query
+    if (redirect) {
+      await router.replace({
+        path: decodeURIComponent(redirect as string),
+      })
+    }
+    else {
+      await router.replace({
+        name: 'QiyueProHome',
+      })
+    }
   }
   finally {
     loading.value = false
@@ -49,7 +53,7 @@ async function login(values: any) {
     </div>
     <van-form :model="postData" :rules="rules" validate-trigger="onSubmit" @submit="login">
       <div class="overflow-hidden rounded-3xl">
-        <van-field v-model="postData.username" :rules="rules.username" placeholder="请输入用户名" name="email" />
+        <van-field v-model="postData.username" :rules="rules.username" placeholder="请输入用户名" name="username" />
       </div>
       <div class="mt-16 overflow-hidden rounded-3xl">
         <van-field v-model="postData.password" :rules="rules.password" placeholder="请输入密码" name="password" type="password" />

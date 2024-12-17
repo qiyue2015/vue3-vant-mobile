@@ -71,7 +71,9 @@ const useAppStore = defineStore('app', () => {
     getTabbar,
   }
 }, {
-  persist: false,
+  persist: {
+    pick: ['mode', 'account', 'tabbar'],
+  },
 })
 
 export default useAppStore

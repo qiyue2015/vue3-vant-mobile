@@ -11,24 +11,27 @@ export interface LoginRes {
 
 export interface UserState {
   uid?: number
-  name?: string
+  nickname?: string
   avatar?: string
+  mobile?: string
+  token?: string
 }
 
 export function login(data: LoginData): Promise<any> {
-  return request.post<LoginRes>('/auth/login', data)
+  return request.post<LoginRes>('/app/index.php?c=auth&a=login&do=basic', data)
 }
 
 export function logout() {
-  return request.post('/user/logout')
+  return request.post('/app/index.php?c=entry&m=qiyue_pro&do=auth&op=logout')
 }
 
 export function getUserInfo() {
-  return request<UserState>('/user/me')
+  return request<UserState>('/app/index.php?c=entry&m=qiyue_pro&do=auth&op=me')
 }
 
-export function getEmailCode(): Promise<any> {
-  return request.get('/user/email-code')
+// 获取粉丝信息
+export function getFansInfo() {
+  return request.get('/app/index.php?c=entry&m=qiyue_pro&do=auth&op=fans')
 }
 
 export function resetPassword(): Promise<any> {
@@ -37,4 +40,13 @@ export function resetPassword(): Promise<any> {
 
 export function register(): Promise<any> {
   return request.post('/user/register')
+}
+
+// 获取微信授权地址
+export function getWechatAuthUrl(redirect: string): Promise<any> {
+  return request('/app/index.php?c=entry&m=qiyue_pro&do=oauth&op=redirect_uri', {
+    params: {
+      redirect,
+    },
+  })
 }

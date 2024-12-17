@@ -8,6 +8,7 @@ import type { EnhancedRouteLocation } from './types'
 import useRouteCacheStore from '@/stores/modules/routeCache'
 import { useAppStore, useUserStore } from '@/stores'
 import { isWeixinBrowser } from '@/utils'
+import { isLogin, setRedirectPath } from '@/utils/auth'
 import setPageTitle from '@/utils/set-page-title'
 
 NProgress.configure({ showSpinner: true, parent: '#app' })
@@ -34,6 +35,7 @@ router.beforeEach(async (to: EnhancedRouteLocation, _from, next) => {
 
   const params = to.params as { uniacid: string }
   if (params?.uniacid) {
+    // 获取公众平台基本信息
     if (appStore.account?.uniacid !== params?.uniacid) {
       appStore.resetSetting()
     }
@@ -50,12 +52,40 @@ router.beforeEach(async (to: EnhancedRouteLocation, _from, next) => {
       setPageTitle(pageTitle)
     }
 
-    if (!userStore.userInfo?.uid) {
-      await userStore.info()
+    if (isLogin()) {
+      if (userStore.userInfo?.uid) {
+        next()
+      }
+      else {
+        await userStore.info()
+        next({ ...to, replace: true })
+      }
+    }
+    else {
+      if (to.meta.requiresAuth) {
+        if (isWeixinBrowser()) {
+          setRedirectPath(to.fullPath)
+          const redirect = encodeURIComponent(`${window.location.origin}/${params?.uniacid}/qiyue-pro/auth/redirect`)
+          const { redirect_uri } = await userStore.getWechatAuthUrl(redirect)
+          window.location.href = redirect_uri
+          next(false)
+        }
+        else {
+          next({
+            name: 'QiyueProAuthLogin',
+            params: to.params,
+            query: { redirect: encodeURIComponent(to.fullPath) },
+          })
+        }
+      }
+      else {
+        next()
+      }
     }
   }
-
-  next()
+  else {
+    next()
+  }
 })
 
 router.afterEach(() => {

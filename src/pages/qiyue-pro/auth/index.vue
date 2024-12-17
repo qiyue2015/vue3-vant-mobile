@@ -3,11 +3,8 @@
 </script>
 
 <template>
+  <div>auth index</div>
 </template>
-
-<style scoped>
-
-</style>
 
 <route lang="json5">
 {
