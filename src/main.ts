@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import { createHead } from '@unhead/vue'
+import { Lazyload } from 'vant'
 import App from '@/App.vue'
 import router from '@/router'
 import pinia from '@/stores'
@@ -29,5 +30,6 @@ app.use(head)
 app.use(router)
 app.use(pinia)
 app.use(i18n)
+app.use(Lazyload)
 
 app.mount('#app')
