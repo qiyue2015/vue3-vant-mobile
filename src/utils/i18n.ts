@@ -1,8 +1,7 @@
 import { createI18n } from 'vue-i18n'
 import enUS from 'vant/es/locale/lang/en-US'
 import zhCN from 'vant/es/locale/lang/zh-CN'
-import { Locale } from 'vant'
-import type { PickerColumn } from 'vant'
+import { Locale, type PickerColumn } from 'vant'
 
 const FALLBACK_LOCALE = 'zh-CN'
 

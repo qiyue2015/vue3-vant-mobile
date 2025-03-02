@@ -12,17 +12,18 @@ export default ({ mode }: ConfigEnv): UserConfig => {
   const env = loadEnv(mode, root)
 
   return {
-    base: env.VITE_APP_PUBLIC_PATH,
+    base: mode === 'production' ? 'https://mp-img1.wifixc.com/static/app-h5/' : '/',
     plugins: createVitePlugins(mode),
 
     server: {
       host: true,
       port: 3000,
       proxy: {
-        '/api': {
-          target: '',
+        [env.VITE_APP_API_BASE_URL]: {
+          target: env.VITE_APP_API_PROXY_HOST,
           ws: false,
           changeOrigin: true,
+          rewrite: path => path.replace(env.VITE_APP_API_BASE_URL, ''),
         },
       },
     },
@@ -45,7 +46,10 @@ export default ({ mode }: ConfigEnv): UserConfig => {
             appSelector: '#app',
             viewportWidth: 375,
             maxDisplayWidth: 600,
-            appContainingBlock: 'auto',
+            rootContainingBlockSelectorList: [
+              'van-tabbar',
+              'van-popup',
+            ],
             border: true,
           }),
         ],

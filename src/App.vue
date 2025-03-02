@@ -1,39 +1,51 @@
 <script setup lang="ts">
+// import { storeToRefs } from 'pinia'
+// import useAppStore from '@/stores/modules/app'
 import useRouteCache from '@/stores/modules/routeCache'
+import { useUserStore } from '@/stores'
+import { showConfirmDialog } from 'vant'
 
-useHead({
-  title: 'Vue3 Vant Mobile',
-  meta: [
-    {
-      name: 'description',
-      content: 'An mobile web apps template based on the Vue 3 ecosystem',
-    },
-    {
-      name: 'theme-color',
-      content: () => isDark.value ? '#00aba9' : '#ffffff',
-    },
-  ],
-  link: [
-    {
-      rel: 'icon',
-      type: 'image/svg+xml',
-      href: () => preferredDark.value ? '/favicon-dark.svg' : '/favicon.svg',
-    },
-  ],
-})
+// const appStore = useAppStore()
+const userStore = useUserStore()
+const route = useRoute()
+const router = useRouter()
+// const { mode } = storeToRefs(appStore)
 
 const keepAliveRouteNames = computed(() => {
   return useRouteCache().routeCaches as string[]
 })
 
-const mode = computed(() => {
-  return isDark.value ? 'dark' : 'light'
+onMounted(() => {
+  setTimeout(() => {
+    if (route.meta?.requiresAuth && !userStore.userInfo?.mobile && route.name !== 'QiyueProUcenterBinding') {
+      showConfirmDialog({
+        title: '设置手机号以继续使用',
+        message: '依据《中华人民共和国网络安全法》相关要求，请设置手机号以继续使用。',
+        confirmButtonText: '去设置',
+        cancelButtonText: '退出登录',
+      })
+        .then(() => {
+          router.push({
+            name: 'QiyueProUcenterBinding',
+            params: route.params,
+            query: {
+              redirect: encodeURIComponent(route.fullPath),
+            },
+          })
+        })
+        .catch(() => {
+          userStore.logout().then(() => {
+            window.location.reload()
+          })
+        })
+    }
+  }, 100)
 })
 </script>
 
 <template>
-  <van-config-provider :theme="mode">
-    <nav-bar />
+  <VanConfigProvider theme="light">
+    <navbar />
     <router-view v-slot="{ Component, route }">
       <section class="app-wrapper">
         <keep-alive :include="keepAliveRouteNames">
@@ -41,14 +53,13 @@ const mode = computed(() => {
         </keep-alive>
       </section>
     </router-view>
-    <tab-bar />
-  </van-config-provider>
+    <tabbar />
+  </VanConfigProvider>
 </template>
 
 <style scoped>
 .app-wrapper {
   width: 100%;
   position: relative;
-  padding: 16px;
 }
 </style>

@@ -1,20 +1,22 @@
 import { defineStore } from 'pinia'
 import type { LoginData, UserState } from '@/api/user'
-import { clearToken, setToken } from '@/utils/auth'
-
 import {
-  getEmailCode,
+  getFansInfo,
   getUserInfo,
-  resetPassword,
   login as userLogin,
   logout as userLogout,
   register as userRegister,
+  getWechatAuthUrl as wechatAuth,
 } from '@/api/user'
+import { clearToken, setToken } from '@/utils/auth'
 
 const InitUserInfo = {
   uid: 0,
   nickname: '',
+  realname: '',
   avatar: '',
+  token: '',
+  mobile: '',
 }
 
 export const useUserStore = defineStore('user', () => {
@@ -27,8 +29,10 @@ export const useUserStore = defineStore('user', () => {
 
   const login = async (loginForm: LoginData) => {
     try {
-      const { data } = await userLogin(loginForm)
+      await userLogin(loginForm)
+      const { data } = await getUserInfo()
       setToken(data.token)
+      setInfo(data)
     }
     catch (error) {
       clearToken()
@@ -37,14 +41,14 @@ export const useUserStore = defineStore('user', () => {
   }
 
   const info = async () => {
-    try {
-      const { data } = await getUserInfo()
-      setInfo(data)
-    }
-    catch (error) {
-      clearToken()
-      throw error
-    }
+    const { data } = await getUserInfo()
+    setToken(data.token)
+    setInfo(data)
+  }
+
+  const fans = async () => {
+    const { data } = await getFansInfo()
+    return data
   }
 
   const logout = async () => {
@@ -57,38 +61,32 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
-  const getCode = async () => {
+  const resetToken = () => {
+    clearToken()
+    setInfo({ ...InitUserInfo })
+  }
+
+  const register = async (data: any) => {
     try {
-      const data = await getEmailCode()
-      return data
+      return await userRegister(data)
     }
     catch {}
   }
 
-  const reset = async () => {
-    try {
-      const data = await resetPassword()
-      return data
-    }
-    catch {}
-  }
-
-  const register = async () => {
-    try {
-      const data = await userRegister()
-      return data
-    }
-    catch {}
+  const getWechatAuthUrl = async (url: string) => {
+    const { data } = await wechatAuth(url)
+    return data
   }
 
   return {
     userInfo,
+    fans,
     info,
     login,
     logout,
-    getCode,
-    reset,
     register,
+    getWechatAuthUrl,
+    resetToken,
   }
 }, {
   persist: true,
