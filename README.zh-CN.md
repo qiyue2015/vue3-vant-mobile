@@ -1,4 +1,4 @@
-<div align="center">
+<div id="top" align="center">
 
 <img src="https://cdn.jsdelivr.net/gh/easy-temps/easy-static/cover.png" alt="cover" />
 
@@ -20,7 +20,7 @@ An mobile web apps template based on the Vue 3 ecosystem.
 
 [文档](https://easy-temps.github.io/easy-docs/vue3-vant-mobile/) / [交流](https://github.com/easy-temps/vue3-vant-mobile/issues/56) / [反馈](https://github.com/easy-temps/vue3-vant-mobile/issues)
 
-<a href="https://vue3-vant-mobile.netlify.app">🖥 在线 Demo</a>
+🖥 <a href="https://vue3-vant-mobile.netlify.app">在线预览</a>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e6828bd2-2904-4c3e-a67c-b97d32aa1275/deploy-status)](https://app.netlify.com/sites/vue3-vant-mobile/deploys)
 
@@ -30,7 +30,7 @@ An mobile web apps template based on the Vue 3 ecosystem.
 
 ## Features
 
-- ⚡️ [Vue 3](https://github.com/vuejs/core), [Vite 5](https://github.com/vitejs/vite), [pnpm](https://pnpm.io/), [esbuild](https://github.com/evanw/esbuild) - 就是快！
+- ⚡️ [Vue 3](https://github.com/vuejs/core), [Vite 6](https://github.com/vitejs/vite), [pnpm](https://pnpm.io/), [esbuild](https://github.com/evanw/esbuild) - 就是快！
 
 - 🗂 [基于文件的路由](./src/router)
 
@@ -54,7 +54,7 @@ An mobile web apps template based on the Vue 3 ecosystem.
 
 - 💾 [本地数据模拟](https://github.com/pengzhanbo/vite-plugin-mock-dev-server)的支持
 
-- 🌈 Git [hooks](./.husky) - 提交代码 eslint 检测 和 提交规范检测
+- 🌈 Git hooks - 提交代码 eslint 检测 和 提交规范检测
 
 - 🪶 [Vant](https://github.com/youzan/vant) - 移动端 Vue 组件库
 
@@ -196,6 +196,9 @@ pnpm build
 <a href="https://github.com/ljt990218"><img src="https://avatars.githubusercontent.com/u/50509815?v=4" width="60px" alt="ljt990218" /></a>
 <a href="https://github.com/heked"><img src="https://avatars.githubusercontent.com/u/14127731?v=4" width="60px" alt="heked" /></a>
 <a href="https://github.com/topcnm"><img src="https://avatars.githubusercontent.com/u/8057893?v=4" width="60px" alt="topcnm" /></a>
+<a href="https://github.com/qiyue2015"><img src="https://avatars.githubusercontent.com/u/11554433?v=4" width="60px" alt="qiyue2015" /></a>
+<a href="https://github.com/scc0"><img src="https://avatars.githubusercontent.com/u/45963033?v=4" width="60px" alt="scc0" /></a>
+<a href="https://github.com/xiaminxi"><img src="https://avatars.githubusercontent.com/u/37994820?v=4" width="60px" alt="xiaminxi" /></a>
 </p>
 
 <h2 align="center">
@@ -226,8 +229,14 @@ pnpm build
 <a href="https://github.com/xyy94813"><img src="https://avatars.githubusercontent.com/u/17971352?v=4" width="60px" alt="xyy94813" /></a>
 <a href="https://github.com/faukwaa"><img src="https://avatars.githubusercontent.com/u/133618995?v=4" width="60px" alt="faukwaa" /></a>
 <a href="https://github.com/chensongni"><img src="https://avatars.githubusercontent.com/u/18071921?v=4" width="60px" alt="chensongni" /></a>
+<a href="https://github.com/csheng-github"><img src="https://avatars.githubusercontent.com/u/88492404?v=4" width="60px" alt="csheng-github" /></a>
+<a href="https://github.com/LostElkByte"><img src="https://avatars.githubusercontent.com/u/24487727?v=4" width="60px" alt="LostElkByte" /></a>
 </p>
 
 ## License
 
 [MIT](./LICENSE) License
+
+<p align="right">
+  <a href="#top">⬆️ 回到顶部</a>
+</p>

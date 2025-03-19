@@ -44,17 +44,17 @@ onMounted(() => {
 </script>
 
 <template>
-  <VanConfigProvider theme="light">
-    <navbar />
-    <router-view v-slot="{ Component, route }">
+  <van-config-provider theme="light">
+    <nav-bar />
+    <router-view v-slot="{ Component }">
       <section class="app-wrapper">
         <keep-alive :include="keepAliveRouteNames">
-          <component :is="Component" :key="route.name" />
+          <component :is="Component" />
         </keep-alive>
       </section>
     </router-view>
     <tabbar />
-  </VanConfigProvider>
+  </van-config-provider>
 </template>
 
 <style scoped>

@@ -33,5 +33,6 @@ declare module 'vue-router/auto-routes' {
     'QiyueProUcenterBinding': RouteRecordInfo<'QiyueProUcenterBinding', '/:uniacid(\\d+)/qiyue-pro/ucenter/binding', Record<never, never>, Record<never, never>>,
     'QiyueProUcenterHistory': RouteRecordInfo<'QiyueProUcenterHistory', '/:uniacid(\\d+)/qiyue-pro/ucenter/history', Record<never, never>, Record<never, never>>,
     'QiyueProUcenterProfile': RouteRecordInfo<'QiyueProUcenterProfile', '/:uniacid(\\d+)/qiyue-pro/ucenter/profile', Record<never, never>, Record<never, never>>,
+    'ScrollCache': RouteRecordInfo<'ScrollCache', '/:uniacid(\\d+)/scroll-cache', Record<never, never>, Record<never, never>>,
   }
 }
