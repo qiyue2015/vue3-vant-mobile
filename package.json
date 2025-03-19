@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "cross-env MOCK_SERVER_PORT=8086 vite",
     "build": "vue-tsc --noEmit && vite build",
+    "build:deploy": "vue-tsc --noEmit && vite build && qshell qupload qupload.conf",
     "preview": "vite preview",
     "test": "vitest",
     "lint": "eslint .",
