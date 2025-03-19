@@ -1,15 +1,11 @@
 <script setup lang="ts">
-// import { storeToRefs } from 'pinia'
-// import useAppStore from '@/stores/modules/app'
 import useRouteCache from '@/stores/modules/routeCache'
 import { useUserStore } from '@/stores'
 import { showConfirmDialog } from 'vant'
 
-// const appStore = useAppStore()
 const userStore = useUserStore()
 const route = useRoute()
 const router = useRouter()
-// const { mode } = storeToRefs(appStore)
 
 const keepAliveRouteNames = computed(() => {
   return useRouteCache().routeCaches as string[]
@@ -45,7 +41,7 @@ onMounted(() => {
 
 <template>
   <van-config-provider theme="light">
-    <nav-bar />
+    <navbar />
     <router-view v-slot="{ Component }">
       <section class="app-wrapper">
         <keep-alive :include="keepAliveRouteNames">
