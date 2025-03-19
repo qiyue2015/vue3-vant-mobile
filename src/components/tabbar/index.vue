@@ -10,6 +10,11 @@ const active = computed(() => menus.value.findIndex((item: any) => {
   return route.fullPath.includes(item.url)
 }))
 
+function getTabbarProps(menu) {
+  const isExternal = /^https?:\/\//.test(menu.url)
+  return isExternal ? { url: menu.url } : { to: menu.url }
+}
+
 onMounted(async () => {
   if (!appStore.tabbar) {
     await appStore.getTabbar()
@@ -19,7 +24,7 @@ onMounted(async () => {
 
 <template>
   <van-tabbar v-if="show" v-model="active" :fixed="true" placeholder>
-    <van-tabbar-item v-for="(menu, index) in menus" :key="index" :url="menu.url">
+    <van-tabbar-item v-for="(menu, index) in menus" :key="index" v-bind="getTabbarProps(menu)">
       <template #icon="props">
         <img :src="props.active ? menu.hover_image : menu.image" alt="">
       </template>
