@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useUserStore } from '@/stores'
-import { type FieldRule, showNotify } from 'vant'
+import { showNotify } from 'vant'
+import type { FieldRule } from 'vant'
 import { loginByVerifyCode, sendVerifyCode } from '@/api/user'
 import router from '@/router'
 

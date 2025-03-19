@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { type EventSignupItem, queryUserEventList } from '@/api/qiyue-event'
+import { queryUserEventList } from '@/api/qiyue-event'
+import type { EventSignupItem } from '@/api/qiyue-event'
 import SignupInfoPopup from '@/pages/qiyue-event/components/signupInfoPopup.vue'
 
 const props = defineProps<{ status?: string }>()

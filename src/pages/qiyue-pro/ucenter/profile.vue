@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { showConfirmDialog, type UploaderFileListItem } from 'vant'
+import { showConfirmDialog } from 'vant'
+import type { UploaderFileListItem } from 'vant'
 import { useUserStore } from '@/stores'
 import router from '@/router'
 import defaultAvatar from '@/assets/images/default-avatar.svg'
