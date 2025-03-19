@@ -36,6 +36,7 @@ onMounted(async () => {
   name: 'QiyueProHome',
   meta: {
     showTabbar: true,
+    keepAlive: true,
   },
 }
 </route>

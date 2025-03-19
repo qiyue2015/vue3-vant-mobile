@@ -16,20 +16,23 @@ function clearToken() {
   localStorage.removeItem(STORAGE_TOKEN_KEY)
 }
 
-// 记录用户当前路由path
+// 记录用户当前路由
 // 用于在微信授权登录后，跳转到之前的页面
-export function setRedirectPath(path: string) {
-  localStorage.setItem(ROUTE_PATH_KEY, path)
+function setRedirectParam(path: string, query: object) {
+  localStorage.setItem(ROUTE_PATH_KEY, JSON.stringify({ path, query }))
 }
 
 // 获取用户授权后要回到的路由path
-export function getRedirectPath() {
-  return localStorage.getItem(ROUTE_PATH_KEY)
+function getRedirectParam() {
+  const data = localStorage.getItem(ROUTE_PATH_KEY)
+  if (data) {
+    return JSON.parse(data)
+  }
 }
 
 // 删除用户授权后要回到的路由path
-export function removeRedirectPath() {
+function removeRedirectParam() {
   localStorage.removeItem(ROUTE_PATH_KEY)
 }
 
-export { isLogin, getToken, setToken, clearToken }
+export { isLogin, getToken, setToken, clearToken, getRedirectParam, setRedirectParam, removeRedirectParam }

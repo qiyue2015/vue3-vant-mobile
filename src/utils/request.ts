@@ -68,15 +68,8 @@ request.interceptors.request.use(requestHandler, errorHandler)
 function responseHandler(response: { data: any, config: InternalAxiosRequestConfig }) {
   // 没有登录
   if (response.data?.act && response.data.url.includes('c=auth&a=login')) {
-    showNotify({
-      type: 'danger',
-      message: '请先登录',
-      duration: 1000,
-      onClose: () => {
-        useUserStore().resetToken()
-        location.reload()
-      },
-    })
+    const userStore = useUserStore()
+    userStore.logout().then(() => {})
     return Promise.reject(response.data)
   }
 

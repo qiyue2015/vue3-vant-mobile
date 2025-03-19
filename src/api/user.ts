@@ -16,7 +16,7 @@ export interface UserState {
   gender?: number
   avatar?: string
   mobile?: string
-  token?: string
+  openid?: string
   birthyear?: string
   birthmonth?: string
   birthday?: string
@@ -60,7 +60,7 @@ export function bindMobile(mobile: string, code: string): Promise<any> {
 export function getWechatAuthUrl(redirect: string): Promise<any> {
   return request('/app/index.php?c=entry&m=qiyue_pro&do=oauth&op=redirect_uri', {
     params: {
-      redirect,
+      redirect: encodeURIComponent(redirect),
     },
   })
 }

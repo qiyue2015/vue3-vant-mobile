@@ -32,10 +32,8 @@ async function onSubmit(values: any) {
     setLoading(true)
     const res = await loginByVerifyCode(values.receiver, values.code)
     await userStore.info()
-    showNotify({
-      type: 'success',
-      message: res.message || '登录成功',
-    })
+    showNotify({ type: 'success', message: res.message || '登录成功' })
+
     const { redirect } = router.currentRoute.value.query
     if (redirect) {
       // router 不会携带 redirect 中的 query 参数，所以使用 window.location.replace
@@ -53,19 +51,13 @@ async function onSubmit(values: any) {
 
 async function getCode() {
   if (!postData.receiver) {
-    showNotify({
-      type: 'warning',
-      message: '请输入手机号',
-    })
+    showNotify({ type: 'warning', message: '请输入手机号' })
     return
   }
 
   // 验证是否11位手机号
   if (!/^1\d{10}$/.test(postData.receiver)) {
-    showNotify({
-      type: 'warning',
-      message: '手机号码格式不正确',
-    })
+    showNotify({ type: 'warning', message: '手机号码格式不正确' })
     return
   }
 

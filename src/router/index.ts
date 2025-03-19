@@ -7,8 +7,9 @@ import 'nprogress/nprogress.css'
 import type { EnhancedRouteLocation } from './types'
 import useRouteCacheStore from '@/stores/modules/routeCache'
 import { useAppStore, useUserStore } from '@/stores'
-import { isLogin, setRedirectPath } from '@/utils/auth'
+import { getRedirectParam, isLogin, removeRedirectParam, setRedirectParam } from '@/utils/auth'
 import { isWeixinBrowser } from '@/utils'
+// import { isWeixinBrowser } from '@/utils'
 
 NProgress.configure({ showSpinner: true, parent: '#app' })
 
@@ -22,12 +23,13 @@ if (import.meta.hot) {
   handleHotUpdate(router)
 }
 
-router.beforeEach(async (to: EnhancedRouteLocation, _from, next) => {
+router.beforeEach(async (to: EnhancedRouteLocation, from, next) => {
   NProgress.start()
 
   const routeCacheStore = useRouteCacheStore()
   const appStore = useAppStore()
   const userStore = useUserStore()
+  const isWeixin = isWeixinBrowser()
 
   // Route cache
   routeCacheStore.addRoute(to)
@@ -46,46 +48,39 @@ router.beforeEach(async (to: EnhancedRouteLocation, _from, next) => {
     }
 
     // Set page title
-    const pageTitle = (to.meta.title || appStore.account.name) as string
-    useHead({ title: pageTitle })
+    useHead({ title: (to.meta.title || appStore.account.name) as string })
 
     if (isLogin()) {
-      if (to.name === 'QiyueProAuthRedirect') {
-        next({ name: 'QiyueProHome', params: to.params })
+      if (!userStore.userInfo?.uid) {
+        await userStore.info()
       }
-      else if (userStore.userInfo?.uid) {
-        next()
+
+      if (to.name === 'QiyueProAuthRedirect') {
+        // 返回上一页
+        const redirect = await getRedirectParam()
+        if (redirect) {
+          removeRedirectParam()
+          next({ ...redirect, replace: true })
+        }
+        else {
+          next({ name: 'QiyueProHome', replace: true })
+        }
       }
       else {
-        await userStore.info()
-        next({ ...to, replace: true })
+        next()
       }
     }
     else {
       if (to.meta.requiresAuth) {
-        if (isWeixinBrowser()) {
-          setRedirectPath(to.fullPath)
-        }
-
+        setRedirectParam(from.fullPath, from.query)
         next({
           name: 'QiyueProAuthLogin',
           params: to.params,
-          query: { redirect: encodeURIComponent(to.fullPath) },
+          query: {
+            redirect: encodeURIComponent(to.fullPath),
+          },
+          replace: isWeixin,
         })
-        // if (isWeixinBrowser()) {
-        //   setRedirectPath(to.fullPath)
-        //   const redirect = encodeURIComponent(`${window.location.origin}/${params?.uniacid}/qiyue-pro/auth/redirect`)
-        //   const { redirect_uri } = await userStore.getWechatAuthUrl(redirect)
-        //   window.location.href = redirect_uri
-        //   next(false)
-        // }
-        // else {
-        //   next({
-        //     name: 'QiyueProAuthLogin',
-        //     params: to.params,
-        //     query: { redirect: encodeURIComponent(to.fullPath) },
-        //   })
-        // }
       }
       else {
         next()

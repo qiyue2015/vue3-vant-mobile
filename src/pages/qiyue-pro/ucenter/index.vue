@@ -45,6 +45,7 @@ const isLogin = computed(() => !!userInfo.value.uid)
   meta: {
     title: '会员中心',
     showTabbar: true,
+    keepAlive: true
   },
 }
 </route>

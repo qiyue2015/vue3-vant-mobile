@@ -1,13 +1,6 @@
 import { defineStore } from 'pinia'
 import type { LoginData, UserState } from '@/api/user'
-import {
-  getFansInfo,
-  getUserInfo,
-  login as userLogin,
-  logout as userLogout,
-  register as userRegister,
-  getWechatAuthUrl as wechatAuth,
-} from '@/api/user'
+import { getUserInfo, login as userLogin, logout as userLogout, register as userRegister } from '@/api/user'
 import { clearToken, setToken } from '@/utils/auth'
 
 const InitUserInfo = {
@@ -31,7 +24,7 @@ export const useUserStore = defineStore('user', () => {
     try {
       await userLogin(loginForm)
       const { data } = await getUserInfo()
-      setToken(data.token)
+      setToken(data.openid)
       setInfo(data)
     }
     catch (error) {
@@ -42,13 +35,8 @@ export const useUserStore = defineStore('user', () => {
 
   const info = async () => {
     const { data } = await getUserInfo()
-    setToken(data.token)
+    setToken(data.openid)
     setInfo(data)
-  }
-
-  const fans = async () => {
-    const { data } = await getFansInfo()
-    return data
   }
 
   const logout = async () => {
@@ -73,19 +61,12 @@ export const useUserStore = defineStore('user', () => {
     catch {}
   }
 
-  const getWechatAuthUrl = async (url: string) => {
-    const { data } = await wechatAuth(url)
-    return data
-  }
-
   return {
     userInfo,
-    fans,
     info,
     login,
     logout,
     register,
-    getWechatAuthUrl,
     resetToken,
   }
 }, {

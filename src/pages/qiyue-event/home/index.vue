@@ -63,6 +63,7 @@ onMounted(() => {
   meta: {
     title: '活动例表',
     showTabbar: true,
+    keepAlive: true,
   },
 }
 </route>
