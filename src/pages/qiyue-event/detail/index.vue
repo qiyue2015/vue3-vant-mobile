@@ -28,11 +28,16 @@ onMounted(async () => {
     if (query.sign === '1' && data.is_registered && data.registration_info?.is_checkin === 0) {
       showLoadingToast({ message: '签到中', forbidClick: true, loadingType: 'spinner', duration: 0 })
       qiyueEventCheckin(query.id).then(() => {
-        showSuccessToast('签到成功')
-        router.replace({
-          name: 'QiyueEventDetail',
-          query: {
-            id: query.id,
+        showSuccessToast({
+          message: '签到成功',
+          duration: 3000,
+          onClose: () => {
+            router.replace({
+              name: 'QiyueEventDetail',
+              query: {
+                id: query.id,
+              },
+            })
           },
         })
       }).catch((res) => {
