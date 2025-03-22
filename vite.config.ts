@@ -22,6 +22,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
           ws: false,
           changeOrigin: true,
           secure: false, // 关闭SSL证书验证
+          cookieDomainRewrite: 'localhost',
           rewrite: path => path.replace(env.VITE_APP_API_BASE_URL, ''),
           headers: {
             Host: env.VITE_APP_API_PROXY_HOST, // 确保虚拟主机识别
