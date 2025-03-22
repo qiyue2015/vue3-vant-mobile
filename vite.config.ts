@@ -18,10 +18,14 @@ export default ({ mode }: ConfigEnv): UserConfig => {
       port: 3000,
       proxy: {
         [env.VITE_APP_API_BASE_URL]: {
-          target: env.VITE_APP_API_PROXY_HOST,
+          target: 'http://127.0.0.1', // 直接使用 IPv4 地址（保留正确 target）
           ws: false,
           changeOrigin: true,
+          secure: false, // 关闭SSL证书验证
           rewrite: path => path.replace(env.VITE_APP_API_BASE_URL, ''),
+          headers: {
+            Host: env.VITE_APP_API_PROXY_HOST, // 确保虚拟主机识别
+          },
         },
       },
     },
