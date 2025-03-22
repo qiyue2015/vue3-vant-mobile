@@ -20,9 +20,9 @@ declare module 'vue-router/auto-routes' {
   export interface RouteNamedMap {
     '404': RouteRecordInfo<'404', '/:all(.*)', { all: ParamValue<true> }, { all: ParamValue<false> }>,
     'home': RouteRecordInfo<'home', '/:uniacid(\\d+)/', Record<never, never>, Record<never, never>>,
+    '/qiyue-event/components/signupInfoPopup': RouteRecordInfo<'/qiyue-event/components/signupInfoPopup', '/:uniacid(\\d+)/qiyue-event/components/signupInfoPopup', Record<never, never>, Record<never, never>>,
     'QiyueEventDetail': RouteRecordInfo<'QiyueEventDetail', '/:uniacid(\\d+)/qiyue-event/detail', Record<never, never>, Record<never, never>>,
     'QiyueEventHome': RouteRecordInfo<'QiyueEventHome', '/:uniacid(\\d+)/qiyue-event/home', Record<never, never>, Record<never, never>>,
-    '/qiyue-event/home/components/EventItems': RouteRecordInfo<'/qiyue-event/home/components/EventItems', '/:uniacid(\\d+)/qiyue-event/home/components/EventItems', Record<never, never>, Record<never, never>>,
     'QiyueEventMy': RouteRecordInfo<'QiyueEventMy', '/:uniacid(\\d+)/qiyue-event/my', Record<never, never>, Record<never, never>>,
     'QiyueEventOperatorBinding': RouteRecordInfo<'QiyueEventOperatorBinding', '/:uniacid(\\d+)/qiyue-event/operator/binding', Record<never, never>, Record<never, never>>,
     'QiyueEventOperatorVerify': RouteRecordInfo<'QiyueEventOperatorVerify', '/:uniacid(\\d+)/qiyue-event/operator/verify', Record<never, never>, Record<never, never>>,

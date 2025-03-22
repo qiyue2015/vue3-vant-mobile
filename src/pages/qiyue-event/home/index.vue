@@ -1,60 +1,72 @@
 <script setup lang="ts">
-import EventItems from './components/EventItems.vue'
+import { queryQiyueEventList } from '@/api/qiyue-event'
 
-const hasInit = ref(false)
-const active = ref(0)
-const weekDays = ref<any[]>([])
-
-function initializeWeek() {
-  const today = new Date() // 当前日期
-  const currentDay = today.getDay() // 获取今天是星期几 (0-6, 0 代表周日)
-  const weekLabels = ['一', '二', '三', '四', '五', '六', '日']
-
-  // 计算本周星期一的日期 (往前偏移到星期一)
-  const monday = new Date(today)
-  monday.setDate(today.getDate() - (currentDay === 0 ? 6 : currentDay - 1))
-
-  // 生成从星期一到星期日的日期数据
-  const tabs = weekLabels.map((label, index) => {
-    const currentDate = new Date(monday)
-    currentDate.setDate(monday.getDate() + index) // 在星期一的基础上偏移
-
-    return {
-      label: `周${label}`,
-      date: currentDate.getDate(), // 只显示日期号
-      fullDate: currentDate.toLocaleDateString(),
-    }
-  })
-
-  weekDays.value = [
-    { label: '全部', date: 0, fullDate: null },
-    ...tabs,
-  ]
-
-  // 设置今天的日期，用于高亮
-  // active.value = weekDays.value.findIndex(tab => tab.date === today.getDate())
-  hasInit.value = true
-}
-
-onMounted(() => {
-  initializeWeek()
+const [loading, setLoading] = useToggle(false)
+const finished = ref(false)
+const list = ref([])
+const isEmpty = ref(false)
+const params = reactive({
+  page: 1,
+  page_size: 20,
 })
+
+async function onLoad() {
+  try {
+    setLoading(true)
+    const res = await queryQiyueEventList(params)
+    if (res.data?.list) {
+      list.value = list.value.concat(res.data.list)
+    }
+    if (res.data.list.length < params.page_size) {
+      finished.value = true
+    }
+    if (res.data.list.length === 0) {
+      isEmpty.value = true
+    }
+  }
+  finally {
+    params.page++
+    setLoading(false)
+  }
+}
 </script>
 
 <template>
-  <van-tabs v-if="hasInit" v-model:active="active" :sticky="true" class="weekday-tabs">
-    <van-tab v-for="(row, index) in weekDays" :key="row.date" :name="index">
-      <template #title>
-        <div class="text-center">
-          <div class="text-14" v-text="row.label" />
-          <div v-if="row.date" class="text-12 line-height-none">
-            {{ row.date }}
-          </div>
-        </div>
-      </template>
-      <EventItems :date="row.fullDate" />
-    </van-tab>
-  </van-tabs>
+  <div class="h-full">
+    <van-empty v-if="isEmpty" description="没有活动" />
+    <van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+      <div v-for="item in list" :key="item.id" class="m-12">
+        <van-cell-group inset>
+          <van-cell :to="{ name: 'QiyueEventDetail', query: { id: item.id } }">
+            <template #icon>
+              <van-image :src="item.logo" class="mr-12 h-90 w-130" fit="cover" lazy-load />
+            </template>
+            <template #title>
+              <div class="h-full flex flex-col justify-between">
+                <div class="van-multi-ellipsis--l2 text-15 font-bold">
+                  {{ item.title }}
+                </div>
+                <div>
+                  <div class="item-info van-ellipsis text-12">
+                    {{ item.address }}
+                  </div>
+                  <div class="item-info van-ellipsis flex justify-between text-12">
+                    <span>{{ item.date_str }}</span>
+                    <template v-if="item.status === 1 || item.status === 2">
+                      <span class="color-blue-500">立即报名</span>
+                    </template>
+                    <template v-if="item.status === 3">
+                      <span class="color-gray-500">已结束</span>
+                    </template>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </van-cell>
+        </van-cell-group>
+      </div>
+    </van-list>
+  </div>
 </template>
 
 <route lang="json5">

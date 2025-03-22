@@ -54,12 +54,12 @@ function onClose() {
 
 <template>
   <van-popup v-bind="{ ...attrs }" position="bottom" class="min-h-3xl" close-on-popstate round closeable safe-area-inset-bottom @open="onOpen" @close="onClose">
-    <div v-if="detail.status === 1 && detail.is_checkin === 0" class="pt-48 text-center">
-      <van-image :src="bindingQRCode" class="h-2xl w-2xl" lazy-load />
-      <div class="mt-10 text-5xl text-gray">
-        请向现场工作人员出示该二维码
-      </div>
-    </div>
+    <!-- <div v-if="detail.status === 1 && detail.is_checkin === 0" class="pt-48 text-center"> -->
+    <!--  <van-image :src="bindingQRCode" class="h-2xl w-2xl" lazy-load /> -->
+    <!--  <div class="mt-10 text-5xl text-gray"> -->
+    <!--    请向现场工作人员出示该二维码 -->
+    <!--  </div> -->
+    <!-- </div> -->
     <van-cell-group title="报名信息" class="registration-info py-10">
       <van-cell title="状态">
         <template #value>
