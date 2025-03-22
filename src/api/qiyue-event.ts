@@ -21,12 +21,14 @@ export interface EventSignupItem {
   event: EventItem
 }
 
+// 活动例表
 export async function queryQiyueEventList(params?: any): Promise<any> {
   return request('/app/index.php?c=entry&m=qiyue_event&do=event&op=list', {
     params,
   })
 }
 
+// 活动详情
 export async function queryQiyueEventDetail(params?: any): Promise<any> {
   return request('/app/index.php?c=entry&m=qiyue_event&do=event&op=detail', {
     params,
@@ -38,6 +40,16 @@ export async function qiyueEventSignup(params?: any): Promise<any> {
   return request('/app/index.php?c=entry&m=qiyue_event&do=signup&op=post', {
     method: 'POST',
     data: params,
+  })
+}
+
+// 活动签到
+export async function qiyueEventCheckin(eventId: string): Promise<any> {
+  return request('/app/index.php?c=entry&m=qiyue_event&do=event&op=checkin', {
+    method: 'POST',
+    data: {
+      event_id: eventId,
+    },
   })
 }
 

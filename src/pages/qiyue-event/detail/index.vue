@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import signupInfoPopup from '@/pages/qiyue-event/components/signupInfoPopup.vue'
-import { queryQiyueEventDetail } from '@/api/qiyue-event'
+import { qiyueEventCheckin, queryQiyueEventDetail } from '@/api/qiyue-event'
+import { showFailToast, showLoadingToast, showSuccessToast } from 'vant'
+import router from '@/router'
 
 // const router = useRouter()
 const route = useRoute()
 
-const query = route.query as { id: string }
-const loading = ref(false)
+const query = route.query as { id: string, sign: string }
+const [loading, setLoading] = useToggle(false)
 const detail = ref<any>(null)
 
 const showPopupIng = ref(false)
@@ -16,12 +18,30 @@ onMounted(async () => {
     if (!query.id) {
       throw new Error('id is required')
     }
-    loading.value = true
+
+    setLoading(true)
+
     const { data } = await queryQiyueEventDetail(query)
     detail.value = data
+
+    // 签到弹窗
+    if (query.sign === '1' && data.is_registered && data.registration_info?.is_checkin === 0) {
+      showLoadingToast({ message: '签到中', forbidClick: true, loadingType: 'spinner', duration: 0 })
+      qiyueEventCheckin(query.id).then(() => {
+        showSuccessToast('签到成功')
+        router.replace({
+          name: 'QiyueEventDetail',
+          query: {
+            id: query.id,
+          },
+        })
+      }).catch((res) => {
+        showFailToast(res.message || '签到失败')
+      })
+    }
   }
   finally {
-    loading.value = false
+    setLoading(false)
   }
 })
 </script>
