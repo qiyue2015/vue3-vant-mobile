@@ -20,6 +20,7 @@ export interface UserState {
   birthyear?: string
   birthmonth?: string
   birthday?: string
+  token?: string
 }
 
 export function login(data: LoginData): Promise<any> {

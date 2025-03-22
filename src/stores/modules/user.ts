@@ -24,7 +24,7 @@ export const useUserStore = defineStore('user', () => {
     try {
       await userLogin(loginForm)
       const { data } = await getUserInfo()
-      setToken(data.openid)
+      setToken(data.token)
       setInfo(data)
     }
     catch (error) {
@@ -35,7 +35,7 @@ export const useUserStore = defineStore('user', () => {
 
   const info = async () => {
     const { data } = await getUserInfo()
-    setToken(data.openid)
+    setToken(data.token)
     setInfo(data)
   }
 
