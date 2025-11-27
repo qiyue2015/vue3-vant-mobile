@@ -1,14 +1,14 @@
 <template>
   <h1 class="text-base color-pink font-semibold">
-    {{ $t('unocss.title') }}
+    你好, Unocss!
   </h1>
 
   <p class="text-gray-700 mt-2 dark:text-white">
-    {{ $t('unocss.description') }}
+    这是一个简单的 Unocss 使用示例。
   </p>
 
   <button class="btn mt-2">
-    {{ $t('unocss.button') }}
+    按钮
   </button>
 </template>
 

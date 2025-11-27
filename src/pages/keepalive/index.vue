@@ -8,7 +8,7 @@ const value = ref(0)
 
 <template>
   <div class="text-sm space-y-2">
-    <p>{{ $t('keepAlive.label') }}</p>
+    <p>当前组件将会被缓存</p>
     <van-stepper v-model="value" />
   </div>
 </template>

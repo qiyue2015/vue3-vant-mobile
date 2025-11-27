@@ -1,11 +1,9 @@
 <script setup lang="ts">
-const { t } = useI18n()
-
 const barOption = ref({
   title: {},
   tooltip: {},
   xAxis: {
-    data: [t('charts.January'), t('charts.February'), t('charts.March'), t('charts.April'), t('charts.May'), t('charts.June')],
+    data: ['1月', '2月', '3月', '4月', '5月', '6月'],
   },
   yAxis: {},
   series: [

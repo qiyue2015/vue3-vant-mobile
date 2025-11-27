@@ -8,7 +8,7 @@ const { counter } = storeToRefs(counterStore)
 
 <template>
   <div class="text-sm space-y-2">
-    <p> {{ $t('counter.description') }}</p>
+    <p> 该计数器的状态通过 Pinia 持久化。刷新页面试试看！</p>
     <van-stepper v-model="counter" />
   </div>
 </template>
